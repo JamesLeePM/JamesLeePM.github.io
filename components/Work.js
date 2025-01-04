@@ -13,7 +13,7 @@ function Work({ data }) {
       <div>
         <h2>{name}</h2>
         <div className={s["image-container"]}>
-          <Image src={image} alt={name} fill />
+          <Image src={image} alt={name} layout="responsive" width={500} height={300} />
         </div>
         <p>{description}</p>
         <ul>
@@ -30,7 +30,7 @@ function Work({ data }) {
     <div className={s["work-container"]}>
       <div className={s["work"]}>
         <div className={s["image-container"]}>
-          <Image src={image} alt={name} fill />
+          <Image src={image} alt={name} layout="responsive" width={500} height={300} />
         </div>
       </div>
       <div className={s["details-container"]}>
