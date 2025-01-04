@@ -9,12 +9,7 @@ function Footer() {
         {/* <Contact /> */}
         <div className="social-links">
           <Image src="/img/github.svg" alt="GitHub" width={24} height={24} />
-          <Image src="/img/github.svg" alt="GitHub" width={24} height={24} />
           <Image src="/img/linkedin.svg" alt="LinkedIn" width={24} height={24} />
-          <Image src="/img/linkedin.svg" alt="LinkedIn" width={24} height={24} />
-          <Image src="/img/medium.svg" alt="Medium" width={24} height={24} />
-          <Image src="/img/medium.svg" alt="Medium" width={24} height={24} />
-
         </div>
         <a className="footer-email" href="mailto:jamesdlee77@gmail.com">
           jamesdlee77@gmail.com
