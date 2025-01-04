@@ -16,7 +16,7 @@ function HeroSection() {
     <section className="section-hero">
       <div className="row hero-content">
         <div className="header-text">
-          <h1 className="heading-primary heading-primary--black">My name is James Lee</h1>
+          <h1 className="heading-primary heading-primary--custom">My name is James Lee</h1>
           <h2 className="heading-secondary heading-secondary--blue">
             AI Innovator and Product Technologist based remotely in USA
           </h2>
