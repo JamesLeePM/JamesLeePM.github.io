@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
 /* Variables */
 :root {
-  --color-primary: #172b4d;
-  --color-primary-dark: #102445;
+  --primary-color: #172b4d;
+  --primary-color-dark: #102445;
   --color-secondary: #36b37e;
   --color-secondary-dark: #26865e;
-  --color-secondary-light: #c5e9da;
-  --color-grey-1: #fefefe;
   --color-grey-2: #ebf0ee;
+  --color-backdrop: #00000053;
+  --color-primary: #1e3a8a; /* Dark blue */
+  --color-primary-dark: #1e40af; /* Darker blue */
+  --color-secondary: #3b82f6; /* Blue */
+  --color-secondary-dark: #2563eb; /* Darker blue */
+  --color-secondary-light: #93c5fd; /* Lighter blue */
+  --color-grey-1: #f1f5f9; /* Light grey */
+  --color-grey-2: #e2e8f0; /* Grey */
 }
 
 /* GLOBAL RESET */
@@ -19,13 +27,14 @@
 }
 
 html {
+  /* Setting the base font size to 62.5% to make 1rem equal to 10px for easier calculations */
   font-size: 62.5%;
 }
 
 body {
   font-family: "Inter", sans-serif;
   font-size: 1.8rem;
-  color: #333;
+  color: var(--color-primary-dark);
   line-height: 1.6;
   font-weight: 400;
   width: 100%;
@@ -69,9 +78,9 @@ body {
 .backdrop {
   position: fixed;
   left: 0;
-  top: 0;
+  background-color: var(--color-backdrop);
   width: 100%;
-  background-color: #00000053;
+  background-color: var(--color-secondary);
   z-index: 1000;
   padding: 6rem 0;
   height: 100%;
@@ -81,7 +90,7 @@ body {
 .modal {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width: 80%;
+  padding: 2rem 2rem 3rem;
   padding: 2rem 2rem 3rem 2rem;
   background-color: #fff;
   border-radius: 1rem;
@@ -95,7 +104,7 @@ body {
   margin-bottom: -5rem;
   margin-right: 0.5rem;
   z-index: 2;
-  fill: rgb(170, 170, 170);
+  fill: var(--color-grey-3);
 }
 
 .modal-img {
@@ -163,7 +172,7 @@ body {
 .modal a:link,
 .modal a:visited {
   text-decoration: none;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-hover);
   padding: 0.8rem 0.8rem;
   border-radius: 0.6rem;
   color: #fff;
@@ -188,10 +197,6 @@ body {
   height: 1.6rem;
   fill: #3a4a42;
   cursor: pointer;
-}
-
-.menu-icon-open {
-  /* margin-right: -26px; */
 }
 
 .margin-left {
@@ -319,7 +324,7 @@ body {
 }
 
 .heading-primary {
-  color: var(--color-primary);
+  color: var(--primary-color);
   font-size: 2.4rem;
   font-weight: 800;
   margin-bottom: 1.6rem;
@@ -358,17 +363,26 @@ body {
 }
 
 .button {
-  font-size: 1.8rem;
-  cursor: pointer;
-  border: none;
-  padding: 1.2rem 2.4rem;
-  border-radius: 0.4rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem; /* Adjust padding for smaller size */
+  background-color: var(--color-primary);
   color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1.4rem; /* Adjust font size for smaller text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+  }
 }
 
 .button-primary {
-  background-color: var(--color-primary);
+  background-color: var(--primary-color);
   transition: all 0.3s ease;
 }
 
@@ -465,7 +479,7 @@ body {
   padding-top: 4rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #172b4d;
-  .btn {
+  border-bottom: 2px solid var(--primary-color);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -477,7 +491,6 @@ body {
     border-radius: 3px;
     font-family: inherit;
     font-size: 1.6rem;
-  }
 }
 
 .work {
@@ -506,9 +519,7 @@ body {
 }
 
 .details-container {
-  padding: 2rem;
-  text-align: center;
-  padding-bottom: 4rem;
+  padding: 1rem;
 }
 
 .details-container .skills {
@@ -569,29 +580,23 @@ body {
   border-radius: 50%;
 }
 
-footer {
-  background: linear-gradient(
-      to right bottom,
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("../img/illustration-contact-form.svg") no-repeat bottom right;
-  background-size: 15%;
-  padding: 4rem 0;
-}
-
 .footer-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 6rem;
+  align-items: center;
+  padding: 1px;
+  background-color: var(--color-primary-dark);
+  color: var(--color-grey-1);
 }
 
-.footer-container h2 {
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 52px;
+.quote {
+  margin-top: 10px;
   text-align: center;
-  margin-bottom: 5.8rem;
+
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+  }
 }
 
 form {
@@ -654,7 +659,7 @@ textarea::placeholder {
 
 form button {
   background: #36b37f;
-  border: 1px solid transparent;
+  background: var(--color-secondary);
   border-radius: 4px;
   align-self: center;
   padding: 1.2rem;
@@ -685,7 +690,7 @@ form button {
 .footer-email {
   text-decoration: none;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1;
   color: #42526e;
   display: block;
@@ -760,10 +765,6 @@ form button {
     display: none;
   }
 
-  .logo {
-    /* display: none; */
-  }
-
   .heading-primary {
     font-size: 4rem;
   }
@@ -835,7 +836,7 @@ form button {
 }
 
 .active-menu-link {
-  color: #1e488f !important;
+  color: var(--color-secondary-dark) !important;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,20 +1,15 @@
 import React from "react";
+import Modal from "../components/Modal";
+import Footer from "../components/Footer";
 
-import { useSelector } from "react-redux";
-import Modal from "@/components/Modal";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-function RootLayout({ children }) {
-  const { modalOpen } = useSelector((state) => state.modal);
+const RootLayout = ({ children }) => {
   return (
-    <>
-      <Header />
+    <div>
       {children}
+      <Modal />
       <Footer />
-      <div className="modal-container">{modalOpen && <Modal />}</div>
-    </>
+    </div>
   );
-}
+};
 
 export default RootLayout;

@@ -1,10 +1,18 @@
 .about-page {
-  background-color: #e6e8f0; // Slightly darker background
+  padding: 20px;
+  background-color: #f9f9f9;
 
   .about-header {
+    text-align: center;
+    margin-bottom: 20px;
     color: var(--color-text-light-2);
     background-color: #151b3d; // Darker navy
     color: #4a7885; // Darker blue-gray
+
+    h1 {
+      font-size: 2.4rem;
+      color: #333;
+    }
 
     // Rest of the about-header styles remain the same
   }
@@ -20,26 +28,40 @@
     .author-wrapper {
       background-color: #00112817; // Slightly darker transparent navy
       flex: 0 0 auto;
+    }
 
-      .details {
-        flex: 1;
+    .details {
+      flex: 1;
+      text-align: left;
 
-        .socials {
-          .icon-wrapper {
-            .icon {
-              color: #404040; // Darker gray for icons
+      h3 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #333;
+      }
 
-              &:hover {
-                color: var(--color-text-dark-2);
-              }
+      h4 {
+        margin-bottom: 10px;
+        font-size: 1.6rem;
+        color: #666;
+      }
+
+      .socials {
+        .icon-wrapper {
+          .icon {
+            color: #404040; // Darker gray for icons
+
+            &:hover {
+              color: var(--color-text-dark-2);
             }
           }
         }
       }
     }
   }
+
+  .content {
+    margin-top: 20px;
+  }
 }
 
-.content {
-  // Your existing styles
-}

@@ -17,8 +17,8 @@ function AboutPage() {
           <Image
             src="/img/james-developer.png"
             alt="James Lee"
-            width={150} // Adjusted width
-            height={150} // Adjusted height
+            width={150}
+            height={150}
           />
         </div>
 

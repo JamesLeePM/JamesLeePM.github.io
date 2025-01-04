@@ -7,14 +7,14 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
+        "lint": "eslint . -c .js,.jsx,.ts,.tsx",
         "export": "next export",
         "predeploy": "npm run build && npm run export",
-        "deploy": "gh-pages -d out"
+        "deploy": "gh-pages -d out",
+        "lint:fix": "eslint . -c .js,.jsx,.ts,.tsx --fix"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.4",
-        "eslint": "8.38.0",
         "eslint-config-next": "13.3.0",
         "next": "^15.1.3",
         "react": "18.2.0",
@@ -24,8 +24,12 @@
         "sass": "^1.62.0"
     },
     "devDependencies": {
+        "@eslint/js": "^9.17.0",
         "@playwright/test": "^1.49.1",
+        "eslint": "^8.57.1",
+        "eslint-plugin-react": "^7.37.3",
         "gh-pages": "^6.3.0",
+        "globals": "^15.14.0",
         "playwright": "^1.49.1"
     }
 }

@@ -1,75 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { modalActions } from "@/redux/modalSlice";
-import { CloseIcon } from "@/svg";
-import { projectsData } from "./WorksSection";
-import Image from "next/image";
+import { modalActions } from "../redux/modalSlice";
+import styles from "./Modal.module.scss";
 
-function Modal() {
-  const { activeModalDataId } = useSelector((state) => state.modal);
+const Modal = () => {
   const dispatch = useDispatch();
+  const { isOpen, content } = useSelector((state) => state.modal);
 
-  const activeData = activeModalDataId
-    ? projectsData.find((p) => p.id === activeModalDataId)
-    : {};
+  const closeModal = () => {
+    dispatch(modalActions.closeModal());
+  };
 
-  const sourceCodeLinkStyles = activeData.private
-    ? {
-        color: "currentColor",
-        cursor: "not-allowed",
-        opacity: 0.9,
-        pointerEvents: "none",
-      }
-    : {};
+  if (!isOpen) return null;
 
   return (
-    <div
-      className="backdrop"
-      onClick={(e) => dispatch(modalActions.closeModal())}
-    >
-      {activeData?.id && (
-        <div className="modal">
-          <CloseIcon
-            className="modal-close-icon"
-            onClick={() => dispatch(modalActions.closeModal())}
-          />
-          <Image
-            className="modal-img"
-            src={activeData.image}
-            alt="Modal desktop"
-            layout="responsive"
-            width={700}
-            height={475}
-          />
-
-          <h2>{activeData.name}</h2>
-          <div className="button-container">
-            <a href={activeData.link} target="__blank" className="link-one">
-              Live Version{" "}
-              <Image src="/img/modal-live-icon.svg" alt="Modal icon" width={24} height={24} />
-            </a>
-            <a
-              href={activeData.linkSource}
-              target="__blank"
-              style={sourceCodeLinkStyles}
-            >
-              {`${activeData.private ? "Source Code(Private)" : "Source Code"}`}
-              <Image src="/img/modal-gihub-icon.svg" alt="Modal icon" width={24} height={24} />{" "}
-            </a>
-          </div>
-
-          <ul className="modal-skills">
-            {activeData.technologies.map((item) => (
-              <li key={item} className="skill-tag skill-tag--grey">
-                {item}
-              </li>
-            ))}
-          </ul>
-          <p className="modal-description">{activeData.description}</p>
-        </div>
-      )}
+    <div className={styles["modal-overlay"]} onClick={closeModal}>
+      <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+        <button className={styles["close-button"]} onClick={closeModal}>
+          &times;
+        </button>
+        {content}
+      </div>
     </div>
   );
-}
+};
 
 export default Modal;
