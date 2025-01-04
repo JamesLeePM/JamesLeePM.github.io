@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { CloseMenuIcon, OpenMenuIcon } from "@/svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,9 +17,7 @@ function Header() {
     <header className="header">
       <div className="header-content row">
         <div className="logo">
-          <Link href="/">
-            <img src="./img/icon-james.png" alt="Home" />
-          </Link>
+          <Image src="/img/icon-james.png" alt="Home" width={50} height={50} />
         </div>
         <nav className="nav">
           <div className="menu-icons-container margin-left">

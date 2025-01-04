@@ -100,8 +100,8 @@ export default function Contact() {
   return (
     <div className="form-container">
       <h2 className="heading-secondary heading-secondary--blue">
-        I'm always eager to hear about new projects, so feel
-        free to reach out if you'd like to chat.
+        I&apos;m always eager to hear about new projects, so feel
+        free to reach out if you&apos;d like to chat.
       </h2>
       <form className="form" onSubmit={formSubmitHandler}>
         <input

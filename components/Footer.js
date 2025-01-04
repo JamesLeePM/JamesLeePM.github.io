@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 // import Contact from "./Contact";
 
 function Footer() {
@@ -7,15 +8,12 @@ function Footer() {
       <div className="footer-container row">
         {/* <Contact /> */}
         <div className="social-links">
-          <a href="https://github.com/jamesakanoa">
-            <img src="./img/github.svg" type="image/svg+xml"></img>
-          </a>
-          <a target="_blank" href="https://www.linkedin.com/in/luminary-james-lee">
-            <img src="./img/linkedin.svg" type="image/svg+xml"></img>
-          </a>
-          <a target="_blank" href="https://medium.com/@jamesdlee77">
-            <img src="./img/medium.svg" type="image/svg+xml"></img>
-          </a>
+          <Image src="/img/github.svg" alt="GitHub" width={24} height={24} />
+          <Image src="/img/github.svg" alt="GitHub" width={24} height={24} />
+          <Image src="/img/linkedin.svg" alt="LinkedIn" width={24} height={24} />
+          <Image src="/img/linkedin.svg" alt="LinkedIn" width={24} height={24} />
+          <Image src="/img/medium.svg" alt="Medium" width={24} height={24} />
+          <Image src="/img/medium.svg" alt="Medium" width={24} height={24} />
 
         </div>
         <a className="footer-email" href="mailto:jamesdlee77@gmail.com">

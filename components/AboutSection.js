@@ -9,7 +9,7 @@ function AboutSection() {
       <div className="about-header row">
         <h2 className="section-title m-b-l">About Me</h2>
         <p className="description-text m-b-l">
-          With over 14 years of experience in product management, AI implementation, and data analytics, I've led transformative projects across various industries. At EasyPost, I spearheaded the development of a multi-user login feature that increased customer adoption by 1000% and boosted revenue by 20%. My expertise spans from transforming multi-million dollar products into billion-dollar revenue generators to implementing cutting-edge AI and machine learning technologies.
+          With over 14 years of experience in product management, AI implementation, and data analytics, I&apos;ve led transformative projects across various industries. At EasyPost, I spearheaded the development of a multi-user login feature that increased customer adoption by 1000% and boosted revenue by 20%. My expertise spans from transforming multi-million dollar products into billion-dollar revenue generators to implementing cutting-edge AI and machine learning technologies.
         </p>
         <button
           className="button button-secondary m-t-s m-b-xl"

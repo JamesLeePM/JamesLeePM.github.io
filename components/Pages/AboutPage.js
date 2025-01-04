@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import s from "./AboutPage.module.scss";
 import Socials from "../Socials";
 import ProductLeaderContent from "../ProductLeaderContent";
@@ -12,11 +13,12 @@ function AboutPage() {
       <div className={`${s["body-content"]} row`}>
         <hr className="divider-2" />
         <div className={s["author-wrapper"]}>
-          <div className={s["image-wrapper"]}>
-            <img
-              src="./img/james-developer.png"
+            <Image
+              src="/img/james-developer.png"
               alt="James Lee"
               className={s["author-img"]}
+              width={500} // specify the width
+              height={500} // specify the height
             />
           </div>
 
@@ -29,7 +31,6 @@ function AboutPage() {
         <div className={s["content"]}>
           <ProductLeaderContent />
         </div>
-      </div>
     </main>
   );
 }

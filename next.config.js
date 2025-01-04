@@ -3,4 +3,12 @@ const nextConfig = {
     reactStrictMode: true,
   }
   
-  module.exports = nextConfig
+const isProd = process.env.NODE_ENV === 'production';
+
+module.exports = {
+  assetPrefix: isProd ? '/jamesleepm.github.io/' : '',
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
+};

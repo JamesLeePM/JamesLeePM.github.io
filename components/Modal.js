@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "@/redux/modalSlice";
 import { CloseIcon } from "@/svg";
 import { projectsData } from "./WorksSection";
+import Image from "next/image";
 
 function Modal() {
   const { activeModalDataId } = useSelector((state) => state.modal);
@@ -24,7 +25,7 @@ function Modal() {
   return (
     <div
       className="backdrop"
-      // onClick={(e) => dispatch(modalActions.closeModal())}
+      onClick={(e) => dispatch(modalActions.closeModal())}
     >
       {activeData?.id && (
         <div className="modal">
@@ -32,17 +33,20 @@ function Modal() {
             className="modal-close-icon"
             onClick={() => dispatch(modalActions.closeModal())}
           />
-          <img
+          <Image
             className="modal-img"
             src={activeData.image}
             alt="Modal desktop"
+            layout="responsive"
+            width={700}
+            height={475}
           />
 
           <h2>{activeData.name}</h2>
           <div className="button-container">
             <a href={activeData.link} target="__blank" className="link-one">
               Live Version{" "}
-              <img src="./img/modal-live-icon.svg" alt="Modal icon" />
+              <Image src="/img/modal-live-icon.svg" alt="Modal icon" width={24} height={24} />
             </a>
             <a
               href={activeData.linkSource}
@@ -50,7 +54,7 @@ function Modal() {
               style={sourceCodeLinkStyles}
             >
               {`${activeData.private ? "Source Code(Private)" : "Source Code"}`}
-              <img src="./img/modal-gihub-icon.svg" alt="Modal icon" />{" "}
+              <Image src="/img/modal-gihub-icon.svg" alt="Modal icon" width={24} height={24} />{" "}
             </a>
           </div>
 

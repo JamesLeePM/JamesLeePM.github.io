@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { modalActions } from "@/redux/modalSlice";
+import Image from 'next/image';
 
 function Work({ data }) {
   const { image, name, technologies, id } = data;
@@ -11,8 +12,9 @@ function Work({ data }) {
   };
 
   return (
-    <div className="work">
-      <div className="image-container">
+    <div className="work-container">
+      <div className="work">
+        <Image src={image} alt={name} layout="responsive" width={500} height={300} />
         <img src={image} alt={name} />
       </div>
       <div className="details-container">

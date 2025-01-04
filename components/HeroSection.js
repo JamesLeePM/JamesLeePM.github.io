@@ -47,11 +47,11 @@ function HeroSection() {
         </p>
         <p className="description-text">
         With my extensive experience in product management, AI implementation, and data analytics 
-        across industries like logistics, fintech, and healthcare, I'm passionate about developing 
+        across industries like logistics, fintech, and healthcare, I&apos;m passionate about developing 
         innovative solutions that drive business growth. From transforming multi-million dollar products 
         into billion-dollar revenue generators to implementing cutting-edge AI and machine learning technologies, 
-        I have a proven track record of delivering impactful results. If you're looking for a seasoned product leader 
-        to help shape your next big project or strategic initiative, I'd be excited to collaborate and bring your vision to life. 🚀🚀
+        I have a proven track record of delivering impactful results. If you&apos;re looking for a seasoned product leader 
+        to help shape your next big project or strategic initiative, I&apos;d be excited to collaborate and bring your vision to life. 🚀🚀
         </p>
         {/* <div className="hero-btn-wrapper">
           <button
