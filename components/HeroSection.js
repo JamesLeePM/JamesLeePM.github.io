@@ -5,7 +5,7 @@ import {
   MediumIcon,
   ScrollToBottomIcon,
   TwitterIcon,
-} from "../svg"; // Adjusted import path
+} from "../svg"; // Updated import path
 import { useRouter } from "next/router";
 
 function HeroSection() {

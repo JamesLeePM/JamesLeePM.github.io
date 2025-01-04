@@ -1,5 +1,5 @@
 import React from "react";
-import { AIIcon, DataAnalyticsIcon, ProductManagementIcon } from "@/svg";
+import { AIIcon, DataAnalyticsIcon, ProductManagementIcon } from "../svg"; // Updated import path
 import { useRouter } from "next/router";
 
 function AboutSection() {
