@@ -12,7 +12,9 @@ function Work({ data }) {
     const content = (
       <div>
         <h2>{name}</h2>
-        <Image src={image} alt={name} layout="responsive" width={500} height={300} />
+        <div className={s["image-container"]}>
+          <Image src={image} alt={name} fill />
+        </div>
         <p>{description}</p>
         <ul>
           {technologies.map((tech) => (
@@ -27,7 +29,9 @@ function Work({ data }) {
   return (
     <div className={s["work-container"]}>
       <div className={s["work"]}>
-        <Image src={image} alt={name} layout="responsive" width={500} height={300} />
+        <div className={s["image-container"]}>
+          <Image src={image} alt={name} fill />
+        </div>
       </div>
       <div className={s["details-container"]}>
         <h3>{name}</h3>
