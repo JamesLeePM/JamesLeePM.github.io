@@ -11,11 +11,19 @@
 
   .body-content {
     background-color: #fff; // Keeping white for contrast
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; // Add some space between the image and details
 
     .author-wrapper {
       background-color: #00112817; // Slightly darker transparent navy
+      flex: 0 0 auto;
 
       .details {
+        flex: 1;
+
         .socials {
           .icon-wrapper {
             .icon {
@@ -30,4 +38,8 @@
       }
     }
   }
+}
+
+.content {
+  // Your existing styles
 }
