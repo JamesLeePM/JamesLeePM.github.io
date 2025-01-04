@@ -10,9 +10,9 @@ import AIIcon from "./AIIcon";
 import DataAnalyticsIcon from "./DataAnalyticsIcon";
 import ProductManagementIcon from "./ProductManagementIcon";
 
-export { default as AIIcon } from './AIIcon';
-export { default as DataAnalyticsIcon } from './DataAnalyticsIcon';
-export { default as ProductManagementIcon } from './ProductManagementIcon';
+//export { default as AIIcon } from './AIIcon';
+//export { default as DataAnalyticsIcon } from './DataAnalyticsIcon';
+// export { default as ProductManagementIcon } from './ProductManagementIcon';
 
 export {
   CloseIcon,

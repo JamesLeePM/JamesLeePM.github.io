@@ -13,9 +13,6 @@ function Footer() {
           <a target="_blank" href="https://www.linkedin.com/in/luminary-james-lee">
             <img src="./img/linkedin.svg" type="image/svg+xml"></img>
           </a>
-          <a target="_blank" href="https://twitter.com/Jamesakanoa">
-            <img src="./img/twitter.svg" type="image/svg+xml"></img>
-          </a>
           <a target="_blank" href="https://medium.com/@jamesdlee77">
             <img src="./img/medium.svg" type="image/svg+xml"></img>
           </a>

@@ -10,7 +10,6 @@ export default function ProductManagementIcon({ className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Paste the contents of productmanagement.svg here */}
       <path
         d="M34.2704 20.896H43.7042C43.8516 20.896 43.999 20.7489 43.999 20.6017C43.3357 10.7422 36.1866 2.57496 26.7528 0.514759C26.5317 0.441181 26.3106 0.735495 26.5317 0.956231C30.9538 5.886 33.7545 12.9495 34.0493 20.6753C33.9756 20.8225 34.123 20.896 34.2704 20.896Z"
         fill="#091E42"

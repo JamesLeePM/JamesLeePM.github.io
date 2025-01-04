@@ -5,7 +5,7 @@ import {
   MediumIcon,
   ScrollToBottomIcon,
   TwitterIcon,
-} from "@/svg";
+} from "../svg"; // Adjusted import path
 import { useRouter } from "next/router";
 
 function HeroSection() {
@@ -82,16 +82,6 @@ function HeroSection() {
             </a>
           </li>
 
-          <li>
-            <a
-              target="_blank"
-              href="https://twitter.com/jamesakanoa"
-              className="social-icon s-twitter-icon"
-              rel="noreferrer"
-            >
-              <TwitterIcon className="social-icon" />
-            </a>
-          </li>
           <li>
             <a
               target="_blank"
