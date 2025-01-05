@@ -50,7 +50,29 @@ export const projectsData = [
     description: `This application allows users to look up Bible verses and provides links to external resources like Bible Gateway 
     and The Bible Says. It is designed to be user-friendly, offering real-time suggestions and a responsive design.`,
     private: true,
+  },
+  {
+    id: "5",
+    name: "LogistAI Platform",
+    technologies: [
+      "TensorFlow",
+      "PyTorch", 
+      "BERT",
+      "GPT-3",
+      "OpenCV",
+      "Apache Spark",
+      "AWS",
+      "Google Cloud Platform",
+      "Docker",
+      "Kubernetes"
+    ],
+    video: "./videos/LogistAI.mp4",
+    link: "Logist.AI",
+    linkSource: "https://github.com/jamesakanoa/LogistAI",
+    description: `LogistAI is an advanced AI-powered logistics optimization platform that leverages cutting-edge artificial intelligence to streamline supply chain operations. The platform features intelligent order processing, AI-driven inventory management, automated warehouse operations, real-time route optimization, and predictive maintenance for fleet management. Initial trials demonstrated a 35% cost reduction and 30% efficiency improvement in logistics operations[3]. The system uses federated learning for continuous improvement while maintaining data security and seamless integration with existing ERP, WMS, and TMS systems[1][2].`,
+    private: true,
   }
+  
 ];
 
 function WorksSection() {

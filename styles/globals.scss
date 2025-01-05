@@ -518,6 +518,83 @@ body {
   box-shadow: 0 0 2rem 1rem rgba(0, 0, 0, 0.08);
 }
 
+/* Add these video styles to your existing globals.scss */
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+  overflow: hidden;
+  border-radius: 0.6rem 0.6rem 0 0;
+  background: var(--color-grey-1);
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-out;
+  }
+}
+
+.work {
+  /* Modify existing work styles */
+  .image-container {
+    height: 20rem;
+    overflow: hidden;
+    
+    img, video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease-out;
+    }
+  }
+
+  &:hover {
+    .image-container {
+      img, video {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+/* Add responsive video styles */
+@media screen and (min-width: 768px) {
+  .video-container,
+  .work .image-container {
+    height: 25rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .video-container,
+  .work .image-container {
+    height: 30rem;
+  }
+}
+
+/* Add video loading state */
+.video-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 4rem;
+  border: 3px solid var(--color-grey-2);
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+
 .details-container {
   padding: 1rem;
 }
@@ -894,5 +971,16 @@ form button {
 @media screen and (min-width: 1200px) {
   .row {
     max-width: 88%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .video-container {
+    height: 25rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .video-container {
+    height: 30rem;
   }
 }
