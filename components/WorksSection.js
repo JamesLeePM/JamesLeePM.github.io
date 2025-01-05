@@ -7,8 +7,7 @@ export const projectsData = [
   {
     id: "1",
     name: "Great Love Mission Church",
-    technologies: [
-      "NodeJs", "Wordpress", "MongoDB", "React", "Next.js", "MySQL", "AWS servers, etc"],
+    technologies: ["NodeJs", "Wordpress", "MongoDB", "React", "Next.js", "MySQL", "AWS servers"],
     image: "./img/projects/glmc.png",
     link: "https://www.greatlovemission.org",
     linkSource: "https://greatlovemission.org/%EC%84%A4%EA%B5%90-%EB%AA%A8%EC%9D%8C/",
