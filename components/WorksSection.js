@@ -66,7 +66,7 @@ export const projectsData = [
       "Docker",
       "Kubernetes"
     ],
-    video: "./videos/LogistAI.mp4",
+    youtubeUrl: "https://youtu.be/fenmNkZtqAw", // Replace with your YouTube URL
     link: "Logist.AI",
     linkSource: "https://github.com/jamesakanoa/LogistAI",
     description: `LogistAI is an advanced AI-powered logistics optimization platform that leverages cutting-edge artificial intelligence to streamline supply chain operations. The platform features intelligent order processing, AI-driven inventory management, automated warehouse operations, real-time route optimization, and predictive maintenance for fleet management. Initial trials demonstrated a 35% cost reduction and 30% efficiency improvement in logistics operations[3]. The system uses federated learning for continuous improvement while maintaining data security and seamless integration with existing ERP, WMS, and TMS systems[1][2].`,
