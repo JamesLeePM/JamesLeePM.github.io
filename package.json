@@ -4,35 +4,37 @@
     "private": true,
     "homepage": "https://jamesleepm.github.io",
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "eslint . -c .js,.jsx,.ts,.tsx",
-        "export": "next export",
-        "predeploy": "npm run build && npm run export",
-        "deploy": "npm run build && npm run export && gh-pages -d out",
-        "lint:fix": "eslint . -c .js,.jsx,.ts,.tsx --fix"
+      "dev": "next dev",
+      "build": "CI=false next build",
+      "start": "next start",
+      "lint": "next lint",
+      "lint:fix": "next lint --fix",
+      "predeploy": "npm run build",
+      "deploy": "next build && touch out/.nojekyll && gh-pages -d out -t true"
     },
     "dependencies": {
-        "@reduxjs/toolkit": "^1.9.4",
-        "autoprefixer": "^10.4.20",
-        "eslint-config-next": "13.3.0",
-        "next": "latest",
-        "postcss": "^8.4.49",
-        "react": "latest",
-        "react-dom": "latest",
-        "react-icons": "^4.8.0",
-        "react-redux": "^8.0.5",
-        "sass": "^1.62.0",
-        "tailwindcss": "^3.4.17"
+      "@headlessui/react": "^1.7.18",
+      "@heroicons/react": "^2.1.1",
+      "framer-motion": "^11.0.3",
+      "next": "14.1.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-icons": "^4.8.0",
+      "tailwindcss": "^3.4.17",
+      "autoprefixer": "^10.4.20",
+      "postcss": "^8.4.49"
     },
     "devDependencies": {
-        "@eslint/js": "^9.17.0",
-        "@playwright/test": "^1.49.1",
-        "eslint": "^8.57.1",
-        "eslint-plugin-react": "^7.37.3",
-        "gh-pages": "^3.2.3",
-        "globals": "^15.14.0",
-        "playwright": "^1.49.1"
+      "@types/node": "^20.11.0",
+      "@types/react": "^18.2.0",
+      "@types/react-dom": "^18.2.0",
+      "@typescript-eslint/eslint-plugin": "^7.1.0",
+      "@typescript-eslint/parser": "^7.1.0",
+      "eslint": "^8.57.1",
+      "eslint-config-next": "14.1.0",
+      "eslint-plugin-react": "^7.37.3",
+      "gh-pages": "^6.1.1",
+      "typescript": "^5.3.3"
     }
-}
+  }
+  
