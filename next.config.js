@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  reactStrictMode: true,
+  output: "export",
   images: {
     unoptimized: true,
   },
-  basePath: '/JamesLeePM',
-  assetPrefix: '/JamesLeePM/',
+  basePath:
+    process.env.NODE_ENV === "production" ? "/jamesleepm.github.io" : "",
+  trailingSlash: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;

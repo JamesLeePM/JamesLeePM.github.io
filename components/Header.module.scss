@@ -1,0 +1,47 @@
+.header {
+  @apply fixed top-0 left-0 right-0 bg-white shadow-md z-50;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  @apply container mx-auto px-4;
+  width: 100%;
+}
+
+.navList {
+  @apply flex justify-center items-center space-x-12;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  @apply transition-transform duration-200 ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.navLink {
+  @apply text-gray-600 hover:text-blue-600 transition-colors duration-200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 12px;
+
+  &:hover {
+    color: var(--primary-color);
+    background-color: rgba(0, 112, 243, 0.05);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}

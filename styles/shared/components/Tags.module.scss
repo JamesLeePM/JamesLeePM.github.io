@@ -1,0 +1,25 @@
+// Tag styles
+.tag {
+  @apply px-3 py-1 text-sm rounded-full;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.tagContainer {
+  @apply flex flex-wrap gap-2;
+}
+
+// Badge styles
+.badge {
+  @apply flex items-center text-sm;
+  color: var(--text-secondary);
+
+  .icon {
+    @apply mr-2;
+  }
+}
+
+.badgeContainer {
+  @apply flex flex-wrap gap-2 items-center;
+}

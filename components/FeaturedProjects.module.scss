@@ -1,0 +1,213 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import "../styles/shared/ProjectCard.module.scss";
+
+.featuredProjects {
+  @apply py-16 bg-gradient-to-b from-gray-900 to-black text-white;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  @apply container mx-auto px-4;
+  max-width: 1400px;
+}
+
+.title {
+  @apply text-4xl font-bold text-center mb-12;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sliderContainer {
+  @apply mb-12;
+
+  :global {
+    .slick-slider {
+      @apply relative;
+    }
+
+    .slick-list {
+      @apply overflow-hidden;
+    }
+
+    .slick-track {
+      @apply flex;
+    }
+
+    .slick-slide {
+      @apply h-auto;
+      > div {
+        @apply h-full;
+      }
+    }
+
+    .slick-dots {
+      @apply bottom-4;
+      li {
+        button:before {
+          @apply text-white opacity-50;
+        }
+        &.slick-active button:before {
+          @apply text-white opacity-100;
+        }
+      }
+    }
+
+    .slick-prev,
+    .slick-next {
+      @apply w-12 h-12 z-10;
+      &:before {
+        @apply text-4xl opacity-75;
+      }
+      &:hover:before {
+        @apply opacity-100;
+      }
+    }
+
+    .slick-prev {
+      @apply left-4;
+    }
+
+    .slick-next {
+      @apply right-4;
+    }
+  }
+}
+
+.slide {
+  @apply px-2;
+}
+
+.projectCard {
+  @apply bg-gray-800 rounded-lg overflow-hidden shadow-xl transition-transform duration-300;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.imageContainer {
+  @apply relative w-full;
+  height: 400px;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+}
+
+.projectImage {
+  @apply w-full h-full object-cover;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.projectContent {
+  @apply p-6 flex-1 flex flex-col;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+.projectName {
+  @apply text-2xl font-bold mb-3;
+  color: var(--primary-color);
+}
+
+.projectDescription {
+  @apply text-gray-300 mb-4 flex-1;
+}
+
+.technologies {
+  @apply flex flex-wrap gap-2 mb-4;
+}
+
+.tech {
+  @apply px-3 py-1 text-sm rounded-full;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.projectLink {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full text-white font-medium transition-all duration-300;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.arrow {
+  @apply transition-transform duration-300;
+}
+
+.cta {
+  @apply text-center mt-8;
+}
+
+.ctaButton {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full text-white font-medium transition-all duration-300;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .iphoneContainer {
+    width: 90%;
+    height: auto;
+  }
+}
+
+.iphoneContainer {
+  @apply relative mb-6;
+  width: 375px;
+  height: 812px;
+  border: 16px solid #000;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}

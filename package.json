@@ -1,40 +1,53 @@
 {
-    "name": "jamesleepm.github.io",
-    "version": "0.1.0",
-    "private": true,
-    "homepage": "https://jamesleepm.github.io",
-    "scripts": {
-      "dev": "next dev",
-      "build": "CI=false next build",
-      "start": "next start",
-      "lint": "next lint",
-      "lint:fix": "next lint --fix",
-      "predeploy": "npm run build",
-      "deploy": "next build && touch out/.nojekyll && gh-pages -d out -t true"
-    },
-    "dependencies": {
-      "@headlessui/react": "^1.7.18",
-      "@heroicons/react": "^2.1.1",
-      "framer-motion": "^11.0.3",
-      "next": "14.1.0",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "react-icons": "^4.8.0",
-      "tailwindcss": "^3.4.17",
-      "autoprefixer": "^10.4.20",
-      "postcss": "^8.4.49"
-    },
-    "devDependencies": {
-      "@types/node": "^20.11.0",
-      "@types/react": "^18.2.0",
-      "@types/react-dom": "^18.2.0",
-      "@typescript-eslint/eslint-plugin": "^7.1.0",
-      "@typescript-eslint/parser": "^7.1.0",
-      "eslint": "^8.57.1",
-      "eslint-config-next": "14.1.0",
-      "eslint-plugin-react": "^7.37.3",
-      "gh-pages": "^6.1.1",
-      "typescript": "^5.3.3"
-    }
+  "name": "jamesleepm.github.io",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://jamesleepm.github.io",
+  "scripts": {
+    "dev": "next dev",
+    "build": "CI=false next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "predeploy": "npm run build",
+    "deploy": "next build && touch out/.nojekyll && gh-pages -d out -t true"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "@reduxjs/toolkit": "^2.5.0",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react-redux": "^7.1.34",
+    "autoprefixer": "^10.4.20",
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^11.0.3",
+    "next": "14.1.0",
+    "nodemailer": "^6.9.16",
+    "postcss": "^8.4.49",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-redux": "^9.2.0",
+    "react-slick": "^0.30.3",
+    "sass": "^1.83.1",
+    "slick-carousel": "^1.8.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.8",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/react-slick": "^0.23.13",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.1.0",
+    "eslint-plugin-react": "^7.37.3",
+    "gh-pages": "^6.1.1",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^5.7.3"
   }
-  
+}

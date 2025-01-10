@@ -1,0 +1,27 @@
+@import "../styles/shared/ProjectCard.module.scss";
+
+.pastProjects {
+  @apply w-full;
+}
+
+.projectsGrid {
+  @apply grid grid-cols-1 gap-8;
+}
+
+// Override specific styles
+.projectCard {
+  cursor: pointer;
+}
+
+.recognition {
+  @apply mb-6 space-y-2;
+
+  .award {
+    @apply flex items-center;
+    color: var(--text-secondary);
+
+    .trophyIcon {
+      @apply mr-2 text-yellow-500;
+    }
+  }
+}
