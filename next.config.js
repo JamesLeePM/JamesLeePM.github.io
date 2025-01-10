@@ -10,4 +10,10 @@ const nextConfig = {
   trailingSlash: true,
 };
 
-module.exports = nextConfig;
+module.exports = {
+  output: 'export',
+  basePath: '/jamesleepm.github.io',
+  images: {
+    unoptimized: true,
+  },
+}
