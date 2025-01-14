@@ -169,3 +169,67 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 }
+
+.carouselContainer {
+  @apply relative;
+  width: 280px;
+  margin: 0 auto;
+  padding: 10px;
+
+  .slick-slider,
+  .slick-list,
+  .slick-track,
+  .slick-slide,
+  .slick-slide > div {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.carouselItem {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &[data-project="citystake"] img {
+    transform: scale(1.2);
+  }
+
+  &[data-project="bawshuman"] img {
+    transform: scale(1);
+  }
+}
+
+.projectImage {
+  object-fit: cover !important;
+  position: relative !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+.projectsContainer {
+  @apply grid gap-12;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  @media (max-width: 768px) {
+    @apply gap-8;
+  }
+}
+
+.projectCard {
+  @apply bg-white rounded-lg shadow-lg p-6;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}

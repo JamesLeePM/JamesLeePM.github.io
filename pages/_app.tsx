@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "../store";
-import RootLayout from "../Layout/RootLayout";
+import Header from "../components/Header";
 import Modal from "../components/Modal";
 import "../styles/globals.scss";
 import "slick-carousel/slick/slick.css";
@@ -12,10 +12,12 @@ import "../styles/Contact.module.scss";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <RootLayout>
-        <Component {...pageProps} />
-        <Modal />
-      </RootLayout>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow pt-20">
+          <Component {...pageProps} />
+        </main>
+      </div>
     </Provider>
   );
 }

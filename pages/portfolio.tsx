@@ -2,21 +2,69 @@ import React from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Header from "../components/Header";
+import Slider from "react-slick";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Image from "next/image";
 import styles from "../styles/Portfolio.module.scss";
 import featuredProjects from "../components/Featured";
-import pastProjects from "../components/Past";
+import pastProjects, { Project } from "../components/Past";
+
+const NextArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      className={`${styles.slickArrow} ${styles.slickNext}`}
+      onClick={onClick}
+      aria-label="Next project"
+    >
+      <FaChevronRight />
+    </button>
+  );
+};
+
+const PrevArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      className={`${styles.slickArrow} ${styles.slickPrev}`}
+      onClick={onClick}
+      aria-label="Previous project"
+    >
+      <FaChevronLeft />
+    </button>
+  );
+};
 
 const PortfolioPage: React.FC = () => {
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Portfolio | James Lee</title>
-        <meta
-          name="description"
-          content="Portfolio of James Lee - Showcasing innovative projects in AI and product development."
-        />
-      </Head>
-
       <Header />
       <main className={styles.main}>
         <motion.section
@@ -33,16 +81,34 @@ const PortfolioPage: React.FC = () => {
                 Ongoing initiatives where I'm actively driving innovation and
                 product development.
               </p>
-              <div className={styles.projectsGrid}>
+              <div className={styles.projectsContainer}>
                 {featuredProjects.map((project) => (
                   <div key={project.id} className={styles.projectCard}>
-                    <div className={styles.imageContainer}>
-                      <img
-                        src={project.images[0]}
-                        alt={project.name}
-                        className={styles.projectImage}
-                        loading="eager"
-                      />
+                    <div className={styles.carouselContainer}>
+                      <div className={styles.iphoneContainer}>
+                        <Slider {...sliderSettings}>
+                          {project.images.map((image, index) => (
+                            <div key={index} className={styles.carouselItem}>
+                              <div
+                                className={styles.imageWrapper}
+                                data-project={
+                                  project.id === "1" ? "citystake" : "bawshuman"
+                                }
+                              >
+                                <Image
+                                  src={image}
+                                  alt={`${project.name} screenshot ${
+                                    index + 1
+                                  }`}
+                                  fill
+                                  className={styles.projectImage}
+                                  priority={index === 0}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </Slider>
+                      </div>
                     </div>
                     <div className={styles.projectContent}>
                       <h3 className={styles.projectName}>{project.name}</h3>
@@ -56,16 +122,6 @@ const PortfolioPage: React.FC = () => {
                           </span>
                         ))}
                       </div>
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.projectLink}
-                        >
-                          View Project
-                        </a>
-                      )}
                     </div>
                   </div>
                 ))}
@@ -75,47 +131,44 @@ const PortfolioPage: React.FC = () => {
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Past Projects</h2>
               <p className={styles.sectionDescription}>
-                A showcase of successful projects that demonstrate my expertise
-                in AI and product leadership.
+                Previous work showcasing my experience and capabilities.
               </p>
               <div className={styles.projectsGrid}>
-                {pastProjects.map((project) => (
+                {pastProjects.map((project: Project) => (
                   <div key={project.id} className={styles.projectCard}>
                     <div className={styles.imageContainer}>
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.name}
+                        width={400}
+                        height={300}
                         className={styles.projectImage}
-                        loading="eager"
+                        priority
                       />
                     </div>
                     <div className={styles.projectContent}>
                       <h3 className={styles.projectName}>{project.name}</h3>
-                      <div className={styles.roleAndTimeline}>
-                        <span className={styles.role}>{project.role}</span>
-                        <span className={styles.timeline}>
-                          {project.timeline}
-                        </span>
-                      </div>
                       <p className={styles.projectDescription}>
                         {project.description}
                       </p>
-                      <div className={styles.metrics}>
-                        {Object.entries(project.metrics).map(([key, value]) => (
-                          <div key={key} className={styles.metric}>
-                            <span className={styles.metricValue}>{value}</span>
-                            <span className={styles.metricLabel}>
-                              {key.replace(/([A-Z])/g, " $1").toLowerCase()}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
                       <div className={styles.technologies}>
                         {project.technologies.map((tech, index) => (
                           <span key={index} className={styles.tech}>
                             {tech}
                           </span>
                         ))}
+                      </div>
+                      <div className={styles.buttonContainer}>
+                        {project.learnMoreLink && (
+                          <a
+                            href={project.learnMoreLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.projectLink}
+                          >
+                            Learn More
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>

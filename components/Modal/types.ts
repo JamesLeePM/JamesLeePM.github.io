@@ -1,5 +1,5 @@
 export interface Project {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   role?: string;
@@ -10,6 +10,7 @@ export interface Project {
   recognition?: string[];
   technologies: string[];
   link?: string;
+  achievements?: string[];
 }
 
 export interface ModalProps {

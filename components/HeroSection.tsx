@@ -24,16 +24,16 @@ const HeroSection: React.FC = () => {
         </p>
         <div className={styles.metrics}>
           <div className={styles.metric}>
-            <span className={styles.number}>30%</span>
-            <span className={styles.label}>AI Models Accuracy Boost</span>
-          </div>
-          <div className={styles.metric}>
             <span className={styles.number}>40%</span>
-            <span className={styles.label}>Contextual Understanding Increased</span>
+            <span className={styles.label}>AI Models Contextual Understanding Increased</span>
           </div>
           <div className={styles.metric}>
-            <span className={styles.number}>35%</span>
-            <span className={styles.label}>Dataset Quality Improved</span>
+            <span className={styles.number}>$1B+</span>
+            <span className={styles.label}>Product transformation with GenAI technologies</span>
+          </div>
+          <div className={styles.metric}>
+            <span className={styles.number}>75%</span>
+            <span className={styles.label}>Optimized processes with customer satisfaction by 40%</span>
           </div>
         </div>
         <motion.div

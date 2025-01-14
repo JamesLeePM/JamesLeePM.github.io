@@ -9,59 +9,82 @@
 }
 
 .contactSection {
-  @apply max-w-4xl mx-auto px-4 py-16;
+  @apply max-w-2xl mx-auto px-4 py-16;
+}
 
-  h2 {
-    @apply text-4xl font-bold mb-8 text-center;
-  }
+.title {
+  @apply text-4xl font-bold text-center mb-8;
+  color: var(--text-primary);
 
-  p {
-    @apply text-lg text-gray-600 mb-12 text-center;
+  &::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(
+      to right,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    margin: 1rem auto;
+    border-radius: 2px;
   }
 }
 
-.form {
-  @apply max-w-xl mx-auto bg-white rounded-lg shadow-lg p-8;
+.content {
+  @apply bg-white rounded-lg shadow-lg p-8;
+}
 
-  .formGroup {
-    @apply mb-6;
+.description {
+  @apply text-lg text-center mb-12 text-gray-600;
+}
 
-    label {
-      @apply block text-sm font-medium text-gray-700 mb-2;
-    }
+.contactInfo {
+  @apply space-y-12;
+}
 
-    input,
-    textarea {
-      @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+.emailSection,
+.socialLinks {
+  @apply text-center;
+}
 
-      &::placeholder {
-        @apply text-gray-400;
-      }
-    }
+.sectionTitle {
+  @apply text-2xl font-semibold mb-4 text-gray-800;
+}
 
-    textarea {
-      @apply h-32 resize-none;
-    }
+.emailAddress {
+  @apply text-xl font-mono bg-gray-50 p-4 rounded-lg inline-block transition-all duration-300;
+
+  &:hover {
+    @apply bg-gray-100;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .submitButton {
-    @apply w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-md 
-    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors;
-
-    &:disabled {
-      @apply bg-gray-400 cursor-not-allowed;
-    }
+  .at,
+  .dot {
+    @apply text-blue-600 font-bold;
   }
 }
 
-.message {
-  @apply mt-4 p-4 rounded-md text-center;
+.links {
+  @apply flex justify-center gap-6 mt-4;
+}
 
-  &.error {
-    @apply bg-red-50 text-red-700;
+.socialLink {
+  @apply flex items-center gap-2 px-6 py-3 rounded-lg text-white transition-all duration-300;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  &.success {
-    @apply bg-green-50 text-green-700;
+  svg {
+    @apply text-xl;
   }
 }

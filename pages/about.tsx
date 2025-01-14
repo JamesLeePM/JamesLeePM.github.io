@@ -2,14 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Header from "../components/Header";
 import styles from "../styles/About.module.scss";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
 
 const AboutPage: React.FC = () => {
   return (
     <div className={styles.container}>
-      <Header />
       <main className={styles.main}>
         <motion.section
           className={styles.aboutSection}

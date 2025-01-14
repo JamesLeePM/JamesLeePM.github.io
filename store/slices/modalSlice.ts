@@ -6,6 +6,8 @@ interface ModalProps {
   role?: string;
   timeline?: string;
   technologies?: string[];
+  images?: string[];
+  image?: string;
   metrics?: {
     accuracyImprovement?: string;
     contextualUnderstanding?: string;

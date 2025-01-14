@@ -9,14 +9,14 @@ const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.iconContainer}>
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/jamesakanoa"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FaGithub className={styles.icon} />
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://linkedin.com/in/luminary-james-lee"
           target="_blank"
           rel="noopener noreferrer"
         >

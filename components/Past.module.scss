@@ -1,0 +1,13 @@
+.pastContainer {
+  padding: 20px;
+}
+
+.imageGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; // Adjust spacing as needed
+}
+
+.imageItem {
+  flex: 1 1 300px; // Adjust flex properties as needed
+}
