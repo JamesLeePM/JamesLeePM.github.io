@@ -5,6 +5,10 @@ const nextConfig = {
   basePath: "",
   assetPrefix: "",
   trailingSlash: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+    return config;
+  },
 };
 
 module.exports = nextConfig;
