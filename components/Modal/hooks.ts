@@ -20,22 +20,31 @@ export const useModalState = (isOpen: boolean, project: Project | null) => {
   return { currentImageIndex, setCurrentImageIndex, handleClose };
 };
 
-export const useImageNavigation = (
-  images: string[] | undefined,
-  currentIndex: number,
-  setCurrentIndex: (index: number) => void
-) => {
+interface UseImageControlsProps {
+  images?: string[];
+}
+
+export const useImageControls = ({ images }: UseImageControlsProps) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
   const handleNext = useCallback(() => {
     if (!images) return;
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, [images, setCurrentIndex]);
+    setCurrentIndex((prev: number) => (prev + 1) % images.length);
+  }, [images]);
 
   const handlePrev = useCallback(() => {
     if (!images) return;
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images, setCurrentIndex]);
+    setCurrentIndex(
+      (prev: number) => (prev - 1 + images.length) % images.length
+    );
+  }, [images]);
 
-  return { handleNext, handlePrev };
+  return {
+    currentIndex,
+    handleNext,
+    handlePrev,
+    setCurrentIndex,
+  };
 };
 
 export const useKeyboardNavigation = (

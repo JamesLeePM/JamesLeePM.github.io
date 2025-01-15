@@ -1,39 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import Header from "../components/Header";
 import Slider from "react-slick";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 import styles from "../styles/Portfolio.module.scss";
 import featuredProjects from "../components/Featured";
 import pastProjects, { Project } from "../components/Past";
-
-const NextArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      className={`${styles.slickArrow} ${styles.slickNext}`}
-      onClick={onClick}
-      aria-label="Next project"
-    >
-      <FaChevronRight />
-    </button>
-  );
-};
-
-const PrevArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      className={`${styles.slickArrow} ${styles.slickPrev}`}
-      onClick={onClick}
-      aria-label="Previous project"
-    >
-      <FaChevronLeft />
-    </button>
-  );
-};
 
 const PortfolioPage: React.FC = () => {
   const sliderSettings = {

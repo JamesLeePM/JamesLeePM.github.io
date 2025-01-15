@@ -1,17 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  basePath: "",
-  images: {
-    unoptimized: true,
-    domains: ["localhost"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
-  },
+  output: "export",
+  images: { unoptimized: true },
+  basePath: "/jamesleepm.github.io",
+  assetPrefix: "/jamesleepm.github.io",
 };
 
 module.exports = nextConfig;
