@@ -1,14 +1,30 @@
 .container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  @apply relative min-h-screen flex flex-col;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/jamesleepm.github.io/images/Introspection 01.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: -1;
+  }
 }
 
 .main {
   flex: 1;
-  padding-top: 5rem;
-  padding-bottom: 4rem;
-  @apply container mx-auto px-4;
+  padding-top: var(--header-height);
+  position: relative;
+  z-index: 1;
 }
 
 .aboutSection {

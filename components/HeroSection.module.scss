@@ -1,6 +1,20 @@
 .heroSection {
-  @apply min-h-screen flex items-center justify-center px-4;
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  @apply relative min-h-screen flex items-center justify-center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/jamesleepm.github.io/images/image.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25; // Adjust this value for fade intensity
+    z-index: -1;
+  }
 }
 
 .content {
