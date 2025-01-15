@@ -2,10 +2,8 @@
 const nextConfig = {
   output: "export",
   images: { unoptimized: true },
-  basePath:
-    process.env.NODE_ENV === "production" ? "/jamesakanoa.github.io" : "",
-  assetPrefix:
-    process.env.NODE_ENV === "production" ? "/jamesakanoa.github.io" : "",
+  basePath: process.env.NODE_ENV === "production" ? "/jamesakanoa" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/jamesakanoa" : "",
   trailingSlash: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
