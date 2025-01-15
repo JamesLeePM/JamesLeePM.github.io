@@ -5,7 +5,7 @@ import {
   useModalState,
   useKeyboardNavigation,
   useBodyLock,
-  useImageNavigation,
+  useImageControls,
 } from "./hooks";
 import { getProjectImages } from "./utils";
 import { ImageGallery } from "./components/ImageGallery";
@@ -51,11 +51,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, project }) => {
   const { currentImageIndex, setCurrentImageIndex, handleClose } =
     useModalState(isOpen, project);
   const images = getProjectImages(project);
-  const { handleNext, handlePrev } = useImageNavigation(
-    images,
-    currentImageIndex,
-    setCurrentImageIndex
-  );
+  const { handleNext, handlePrev } = useImageControls({ images });
 
   const handleModalClose = () => {
     onClose();

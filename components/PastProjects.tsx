@@ -2,30 +2,16 @@ import React, { useState } from "react";
 import { FaTrophy, FaAward, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import pastProjects from "./Past";
+import { Project } from "./Past";
 import styles from "./PastProjects.module.scss";
+import pastProjects from "./Past";
 
-interface Project {
-  id: string;
-  name: string;
-  role: string;
-  timeline: string;
-  technologies: string[];
-  metrics: {
-    [key: string]: string;
-  };
-  image: string;
-  description: string;
-  achievements: string[];
-  recognition?: string[];
-  private?: boolean;
-  highlight?: string;
+interface ProjectCardProps {
+  project: Project;
+  onClick: () => void;
 }
 
-const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({
-  project,
-  onClick,
-}) => (
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
   <motion.div
     className={styles.projectCard}
     onClick={onClick}

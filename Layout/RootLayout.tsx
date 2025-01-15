@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import s from "./Layout.module.scss";
 
@@ -10,7 +10,7 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <div className={s.layout}>
-      <Navigation className={s.navigation} />
+      <Header />
       <main className={s.main}>{children}</main>
       <Footer />
     </div>

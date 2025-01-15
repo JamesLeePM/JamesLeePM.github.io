@@ -7,6 +7,7 @@ import styles from "./FeaturedProjects.module.scss";
 import featuredProjects from "./Featured";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
 const FeaturedProjects: React.FC = () => {
   const settings = {
@@ -45,10 +46,13 @@ const FeaturedProjects: React.FC = () => {
               <div key={project.id} className={styles.slide}>
                 <div className={styles.projectCard}>
                   <div className={styles.imageContainer}>
-                    <img
+                    <Image
                       src={project.images[0]}
                       alt={project.name}
+                      width={800}
+                      height={600}
                       className={styles.projectImage}
+                      priority
                     />
                   </div>
                   <div className={styles.projectContent}>
