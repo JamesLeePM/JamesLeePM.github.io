@@ -5,8 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "predeploy": "rm -rf out && next build",
-    "deploy": "gh-pages -d out"
+    "export": "rm -rf docs && next build && cp CNAME docs/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
