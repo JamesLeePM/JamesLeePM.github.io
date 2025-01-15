@@ -32,61 +32,63 @@ const FeaturedProjects: React.FC = () => {
   };
 
   return (
-    <section className={styles.featuredProjects}>
+    <section className={styles.featured}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={styles.content}
+        style={{ width: "100%" }}
       >
-        <h2 className={styles.title}>Featured Projects</h2>
-        <div className={styles.sliderContainer}>
-          <Slider {...settings}>
-            {featuredProjects.map((project) => (
-              <div key={project.id} className={styles.slide}>
-                <div className={styles.projectCard}>
-                  <div className={styles.imageContainer}>
-                    <Image
-                      src={project.images[0]}
-                      alt={project.name}
-                      width={800}
-                      height={600}
-                      className={styles.projectImage}
-                      priority
-                    />
-                  </div>
-                  <div className={styles.projectContent}>
-                    <h3 className={styles.projectName}>{project.name}</h3>
-                    <p className={styles.projectDescription}>
-                      {project.description}
-                    </p>
-                    <div className={styles.technologies}>
-                      {project.technologies.map((tech, index) => (
-                        <span key={index} className={styles.tech}>
-                          {tech}
-                        </span>
-                      ))}
+        <div className={styles.content}>
+          <h2 className={styles.title}>Featured Projects</h2>
+          <div className={styles.sliderContainer}>
+            <Slider {...settings}>
+              {featuredProjects.map((project) => (
+                <div key={project.id} className={styles.slide}>
+                  <div className={styles.projectCard}>
+                    <div className={styles.imageContainer}>
+                      <Image
+                        src={project.images[0]}
+                        alt={project.name}
+                        width={800}
+                        height={600}
+                        className={styles.projectImage}
+                        priority
+                      />
                     </div>
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.projectLink}
-                      >
-                        View Project <FaArrowRight className={styles.arrow} />
-                      </a>
-                    )}
+                    <div className={styles.projectContent}>
+                      <h3 className={styles.projectName}>{project.name}</h3>
+                      <p className={styles.projectDescription}>
+                        {project.description}
+                      </p>
+                      <div className={styles.technologies}>
+                        {project.technologies.map((tech, index) => (
+                          <span key={index} className={styles.tech}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.projectLink}
+                        >
+                          View Project <FaArrowRight className={styles.arrow} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-        <div className={styles.cta}>
-          <Link href="/portfolio" className={styles.ctaButton}>
-            View All Projects <FaArrowRight className={styles.arrow} />
-          </Link>
+              ))}
+            </Slider>
+          </div>
+          <div className={styles.cta}>
+            <Link href="/portfolio" className={styles.ctaButton}>
+              View All Projects <FaArrowRight className={styles.arrow} />
+            </Link>
+          </div>
         </div>
       </motion.div>
     </section>

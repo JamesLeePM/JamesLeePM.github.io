@@ -1,69 +1,73 @@
-import Head from "next/head";
+"use client";
+
+import React from "react";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Head from "next/head";
 import styles from "../styles/Contact.module.scss";
 
-export default function ContactPage() {
+const ContactPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Contact | James Lee</title>
+        <title>Contact - James Lee | Product Technologist</title>
         <meta
           name="description"
-          content="Get in touch with James Lee. Let's discuss your next project or collaboration opportunity."
+          content="Get in touch with James Lee, a Product Technologist specializing in AI implementation and emerging technologies."
         />
       </Head>
-
       <div className={styles.container}>
         <main className={styles.main}>
-          <motion.div
-            className={styles.contactSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className={styles.title}>Get in Touch</h1>
-            <div className={styles.content}>
-              <p className={styles.description}>
-              I welcome new opportunities and collaborations. <br/>Please reach out and let's connect:
-              </p>
-
-              <div className={styles.contactInfo}>
-                <div className={styles.emailSection}>                  <a
-                    href="mailto:jamesdlee77@gmail.com"
-                    className={styles.emailAddress}
-                  >
-                    jamesdlee77@gmail.com
-                  </a>
-                </div>
-
-                <div className={styles.socialLinks}>
-                  <div className={styles.links}>
-                    <a
-                      href="https://linkedin.com/in/luminary-james-lee"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.socialLink}
-                    >
-                      <FaLinkedin />
-                      <span>LinkedIn</span>
-                    </a>
-                    <a
-                      href="https://github.com/jamesakanoa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.socialLink}
-                    >
-                      <FaGithub />
-                      <span>GitHub</span>
-                    </a>
+          <div className={styles.contactSection}>
+            <motion.div
+              style={{ width: "100%" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className={styles.title}>Get in Touch</h1>
+              <div className={styles.content}>
+                <p className={styles.description}>
+                  I'm always interested in hearing about new opportunities and
+                  innovative projects. Let's connect!
+                </p>
+                <div className={styles.contactInfo}>
+                  <div className={styles.emailSection}>
+                    <h2 className={styles.sectionTitle}>Email</h2>
+                    <div className={styles.emailAddress}>
+                      jamesdlee77<span className={styles.at}>@</span>gmail
+                      <span className={styles.dot}>.</span>com
+                    </div>
+                  </div>
+                  <div className={styles.socialLinks}>
+                    <h2 className={styles.sectionTitle}>Connect</h2>
+                    <div className={styles.links}>
+                      <a
+                        href="https://github.com/jamesakanoa"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                      >
+                        <FaGithub /> GitHub
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/luminary-james-lee"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                      >
+                        <FaLinkedin /> LinkedIn
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </main>
       </div>
     </>
   );
-}
+};
+
+export default ContactPage;
