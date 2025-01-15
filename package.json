@@ -3,10 +3,10 @@
   "homepage": "https://jamesakanoa.github.io",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && output: export",
     "start": "next start",
-    "predeploy": "rm -rf out && next build",
-    "deploy": "gh-pages -d out"
+    "predeploy": "npm run build",
+    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles true"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
