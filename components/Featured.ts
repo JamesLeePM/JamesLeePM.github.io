@@ -35,12 +35,12 @@ const projects: Project[] = [
     description:
       "The ultimate fitness superapp designed to help you reach your peak",
     images: [
-      "/jamesakanoa.github.io/images/projects/BH-1.png",
-      "/jamesakanoa.github.io/images/projects/BH-2.png",
-      "/jamesakanoa.github.io/images/projects/BH-3.png",
-      "/jamesakanoa.github.io/images/projects/BH-4.png",
-      "/jamesakanoa.github.io/images/projects/BH-5.png",
-      "/jamesakanoa.github.io/images/projects/BH-6.png",
+      "/images/projects/BH-1.png",
+      "/images/projects/BH-2.png",
+      "/images/projects/BH-3.png",
+      "/images/projects/BH-4.png",
+      "/images/projects/BH-5.png",
+      "/images/projects/BH-6.png",
     ],
     technologies: ["Python", "Django", "EXPO", "Swift"],
     link: "https://bawshuman.com/",
