@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  output: "standalone",
   images: { unoptimized: true },
-  basePath: process.env.NODE_ENV === "production" ? "/jamesakanoa" : "",
-  assetPrefix: process.env.NODE_ENV === "production" ? "/jamesakanoa" : "",
-  trailingSlash: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
     return config;
