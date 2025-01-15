@@ -2,8 +2,8 @@
 const nextConfig = {
   output: "export",
   images: { unoptimized: true },
-  basePath: "/jamesleepm.github.io",
-  assetPrefix: "/jamesleepm.github.io",
+  basePath: "",
+  assetPrefix: "",
   trailingSlash: true,
 };
 
