@@ -3,7 +3,7 @@
   "homepage": "https://jamesakanoa.github.io",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && output: export",
+    "build": "next build",
     "start": "next start",
     "predeploy": "npm run build",
     "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles true"
