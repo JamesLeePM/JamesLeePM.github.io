@@ -38,7 +38,7 @@ const pastProjects: Project[] = [
       contextualUnderstanding: "40%",
       datasetQuality: "35%",
     },
-    image: "/images/projects/AI-trainer.png",
+    image: "/jamesleepm.github.io/public/images/projects/AI-trainer.png",
     description:
       "Led AI-generated content enhancement initiatives using advanced training techniques, collaborating with industry leaders like Amazon, Nvidia, Google, and xAI. Implemented state-of-the-art methodologies to improve small and large language models (SLMs and LLMs) performance.",
     achievements: [
@@ -72,7 +72,7 @@ const pastProjects: Project[] = [
       timeToMarket: "20%",
       teamProductivity: "25%",
     },
-    image: "/images/projects/easypost.png",
+    image: "/jamesleepm.github.io/public/images/projects/easypost.png",
     description:
       "Spearheaded the development of a multi-user login feature for EasyPost's shipping API platform, significantly improving user collaboration and security.",
     achievements: [
@@ -94,7 +94,7 @@ const pastProjects: Project[] = [
       machineUptime: "50%",
       revenueLossReduction: "60%",
     },
-    image: "/images/projects/analytics.png",
+    image: "/jamesleepm.github.io/public/images/projects/analytics.png",
     description:
       "Led the implementation of a self-service digital analytics platform using QlikSense, revolutionizing data-driven decision-making across USPS management levels.",
     achievements: [
@@ -115,7 +115,7 @@ const pastProjects: Project[] = [
     metrics: {
       projectValue: "$100M+",
     },
-    image: "/images/projects/hero.png",
+    image: "/jamesleepm.github.io/public/images/projects/hero.png",
     description:
       "Led a $100M+ Integrated Human Resources System Project, modernizing HR operations through innovative solutions and strategic implementation.",
     achievements: [
@@ -156,7 +156,7 @@ const pastProjects: Project[] = [
       "Recognized by U.S. Surgeon General",
       "Recognized by the White House",
     ],
-    image: "/images/projects/uhc-epm.png",
+    image: "/jamesleepm.github.io/public/images/projects/uhc-epm.png",
     description:
       "Developed and launched a comprehensive health portal for USPS employees, featuring innovative health management capabilities and secure data handling.",
     achievements: [
