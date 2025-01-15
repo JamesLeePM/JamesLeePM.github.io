@@ -1,4 +1,4 @@
-@import "./shared/ProjectCard.module.scss";
+@use "./shared/ProjectCard.module.scss" as *;
 
 .container {
   @apply relative min-h-screen;
