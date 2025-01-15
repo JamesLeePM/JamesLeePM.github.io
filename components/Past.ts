@@ -38,7 +38,7 @@ const pastProjects: Project[] = [
       contextualUnderstanding: "40%",
       datasetQuality: "35%",
     },
-    image: "/images/projects/AI-trainer.png",
+    image: "/images/projects/ai-trainer.png",
     description:
       "Led AI-generated content enhancement initiatives using advanced training techniques, collaborating with industry leaders like Amazon, Nvidia, Google, and xAI. Implemented state-of-the-art methodologies to improve small and large language models (SLMs and LLMs) performance.",
     achievements: [
