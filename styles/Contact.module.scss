@@ -28,7 +28,12 @@
 }
 
 .contactSection {
-  @apply max-w-2xl mx-auto px-4 py-16;
+  @apply w-full px-4 py-16;
+  max-width: 100vw;
+
+  .content {
+    @apply max-w-2xl mx-auto;
+  }
 }
 
 .title {

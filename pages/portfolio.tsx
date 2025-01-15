@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Header from "../components/Header";
 import Slider from "react-slick";
 import Image from "next/image";
 import styles from "../styles/Portfolio.module.scss";
@@ -39,7 +38,6 @@ const PortfolioPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Header />
       <main className={styles.main}>
         <div className={styles.portfolioSection}>
           <motion.div

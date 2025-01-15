@@ -1,11 +1,14 @@
 {
   "name": "portfolio",
-  "homepage": "https://jamesakanoa.github.io",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "rm -rf docs && next build && cp CNAME docs/"
+    "lint": "next lint",
+    "deploy": "gh-pages -d docs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",

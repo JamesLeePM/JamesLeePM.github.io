@@ -1,18 +1,17 @@
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
-import Header from "../components/Header";
+import RootLayout from "../Layout/RootLayout";
 import { store } from "../store";
 import "../styles/globals.scss";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
-      <div className="layout">
-        <Header />
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </div>
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
     </Provider>
   );
-}
+};
+
+export default App;

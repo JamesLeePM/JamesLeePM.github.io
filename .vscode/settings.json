@@ -1,5 +1,6 @@
 {
-    "workbench.editor.autoLockGroups": {
-        "workbench.editor.chatSession": true
-    }
+  "workbench.editor.autoLockGroups": {
+    "workbench.editor.chatSession": true
+  },
+  "cSpell.words": ["bawshuman", "citystake", "jamesakanoa"]
 }
