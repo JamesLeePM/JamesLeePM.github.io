@@ -35,7 +35,7 @@ npm run dev
 
 ## Live Demo
 
-[View the live website](insert_live_demo_link_here)
+[View the live website](https://jamesakanoa.github.io/)
 
 ## Author
 
