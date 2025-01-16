@@ -18,7 +18,7 @@ npm install
 
 ## Live Demo
 
-[Live Demo Link](https://jamesakano.github.io)
+[Live Demo Link](https://jamesakanoa.github.io)
 
 ## Authors
 
