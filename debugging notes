@@ -1,0 +1,37 @@
+
+1. **Run in debug mode**:
+```bash
+DEBUG=true ./deploy-check.sh
+```
+
+2. **Check specific parts**:
+```bash
+# Test just the build
+./deploy-check.sh build
+
+# Test just the serve
+./deploy-check.sh serve
+```
+
+3. **Common issues and solutions**:
+```bash
+# If permissions are denied
+chmod +x deploy-check.sh
+
+# If npm modules are acting up
+npm clean-install
+
+# If build is failing
+npm run build --verbose
+
+# If deployment fails
+git status  # Check for uncommitted changes
+git config --list  # Verify git configuration
+```
+
+4. **Log files** (add to script):
+```bash
+# Add to script to create logs
+exec 1> >(tee "deploy.log")
+exec 2> >(tee "deploy.error.log")
+```

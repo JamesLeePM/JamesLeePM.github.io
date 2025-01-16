@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# Enable error handling
+set -e  # Exit on error
+set -u  # Exit on undefined variables
+
+# Debug mode (run with DEBUG=true ./deploy-check.sh)
+if [[ "${DEBUG:-}" == "true" ]]; then
+    set -x  # Print each command before executing
+fi
+
+# Function for error handling
+handle_error() {
+    local line_number=$1
+    local error_code=$2
+    echo "❌ Error occurred in line ${line_number} (Exit code: ${error_code})"
+    
+    case $error_code in
+        1)  echo "General error occurred";;
+        127) echo "Command not found error";;
+        128) echo "Invalid argument to exit";;
+        130) echo "Script terminated by Control-C";;
+        *)  echo "Unknown error occurred";;
+    esac
+}
+
+# Set up error trap
+trap 'handle_error ${LINENO} $?' ERR
+
+# Function to check dependencies
+check_dependencies() {
+    echo "🔍 Checking dependencies..."
+    command -v npm >/dev/null 2>&1 || { echo "❌ npm is required but not installed. Aborting." >&2; exit 1; }
+    command -v node >/dev/null 2>&1 || { echo "❌ node is required but not installed. Aborting." >&2; exit 1; }
+}
+
+# Function to clean up
+cleanup() {
+    echo "🧹 Cleaning up previous builds..."
+    rm -rf docs || { echo "❌ Failed to remove docs directory"; exit 1; }
+    rm -rf .next || { echo "❌ Failed to remove .next directory"; exit 1; }
+}
+
+# Function to build
+build() {
+    echo "🏗️ Building..."
+    npm run build || { echo "❌ Build failed"; exit 1; }
+}
+
+# Function to serve and test
+serve_and_test() {
+    echo "🚀 Starting local server..."
+    echo "📱 Visit http://localhost:3000 to check your build"
+    echo "Press Ctrl+C when done testing to continue with deployment"
+    
+    # Start server with error handling
+    if ! npx serve docs; then
+        echo "❌ Server failed to start"
+        exit 1
+    fi
+}
+
+# Function to deploy
+deploy() {
+    echo "📤 Deploying..."
+    if npm run deploy; then
+        echo "✅ Deployment successful!"
+    else
+        echo "❌ Deployment failed"
+        exit 1
+    fi
+}
+
+# Main execution
+main() {
+    # Log start time
+    start_time=$(date +%s)
+    
+    # Run checks and processes
+    check_dependencies
+    cleanup
+    build
+    serve_and_test
+    
+    # Ask for deployment confirmation
+    read -p "Ready to deploy? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        deploy
+    else
+        echo "❌ Deployment cancelled by user"
+        exit 0
+    fi
+    
+    # Log completion time
+    end_time=$(date +%s)
+    duration=$((end_time - start_time))
+    echo "⏱️ Total execution time: ${duration} seconds"
+}
+
+# Run main with error handling
+if main; then
+    echo "✨ Process completed successfully"
+else
+    echo "❌ Process failed"
+    exit 1
+fi
