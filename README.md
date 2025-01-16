@@ -2,7 +2,8 @@
 
 ## Overview
 
-This repository contains the source code for a personal profile website developed using Next.js. The website showcases the professional journey and projects of a product leader who is passionate about coding.
+This repository contains the source code for a personal profile website developed using Next.js. 
+The website showcases the professional journey and projects of a product leader who is passionate about coding.
 
 ## Features
 
