@@ -5,8 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   distDir: "docs",
-  basePath: "",
-  assetPrefix: "./",
+  basePath: "/jamesakanoa.github.io",
+  assetPrefix: "/jamesakanoa.github.io/",
   trailingSlash: true,
 };
 
