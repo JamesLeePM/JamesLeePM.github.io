@@ -3,12 +3,10 @@ const nextConfig = {
   output: "export",
   images: {
     unoptimized: true,
-    loader: "akamai",
-    path: "",
   },
   distDir: "docs",
   basePath: "",
-  assetPrefix: "",
+  assetPrefix: "./",
   trailingSlash: true,
 };
 

@@ -1,8 +1,8 @@
-@import "./components/Card.module.scss";
-@import "./components/Typography.module.scss";
-@import "./components/Tags.module.scss";
-@import "./components/Metrics.module.scss";
-@import "./components/Buttons.module.scss";
+@use "./components/Card.module.scss";
+@use "./components/Typography.module.scss";
+@use "./components/Tags.module.scss";
+@use "./components/Metrics.module.scss";
+@use "./components/Buttons.module.scss";
 
 .projectCard {
   @extend .card;
