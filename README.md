@@ -1,45 +1,56 @@
-# Personal profile website using NextJs
+# Personal Profile Website
 
-Personal profile web app by a product leader passionate about learning to code.
+## Overview
 
-The web app contains a list of my other projects that you can check out.
+This repository contains the source code for a personal profile website developed using Next.js. 
+The website showcases the professional journey and projects of a product leader who is passionate about coding.
 
-## Built With
+## Features
 
+- Responsive design
+- Project showcase
+- Professional background information
+
+## Technology Stack
+
+- Next.js
 - React
 
 ## Getting Started
 
-To get a local copy up, CD into the root folder and run:
+To set up a local copy of the project, follow these steps:
 
-```
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies:
+
+```bash
 npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
 ```
 
 ## Live Demo
 
-[Live Demo Link](https://jamesakano.github.io)
+[View the live website](https://jamesakanoa.github.io/)
 
-## Authors
-
-👤 **Author**
+## Author
 
 - GitHub: [@githubhandle](https://github.com/jamesakanoa)
-- Twitter: [@twitterhandle](https://twitter.com/jamesakanoa)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/luminary-james-lee)
+- LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/luminary-james-lee)
 
-## 🤝 Contributing
+## Contributing
 
-Contributions, issues, and feature requests are welcome!
-
-## Show your support
-
-Give a ⭐️ if you like this project!
+Forks, contributions, issues, and feature requests are welcome. 
 
 ## Acknowledgments
 
-- Inspiration from various github repos available publicly
+This project drew inspiration from various publicly available GitHub repositories.
 
-## 📝 License
+## License
 
-This project is [MIT](./LICENSE.txt) licensed.
+This project is licensed under the MIT License - see the [LICENSE]([https://github.com/jamesakanoa/jamesakanoa.github.io/blob/main/LICENSE.txt]) file for details.
