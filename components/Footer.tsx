@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.iconContainer}>
         <a
-          href="https://github.com/jamesakanoa"
+          href="https://github.com/JamesLeePM"
           target="_blank"
           rel="noopener noreferrer"
         >
