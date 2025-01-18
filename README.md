@@ -36,7 +36,7 @@ npm run dev
 
 ## Live Demo
 
-[View the live website](https://jamesakanoa.github.io/)
+[View the live website](https://JamesLeePM.github.io/)
 
 ## Author
 
