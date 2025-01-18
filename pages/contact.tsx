@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
                     <h2 className={styles.sectionTitle}>Connect</h2>
                     <div className={styles.links}>
                       <a
-                        href="https://github.com/jamesakanoa"
+                        href="https://github.com/JamesLeePM"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}
