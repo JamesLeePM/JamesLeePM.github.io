@@ -51,7 +51,7 @@ const ContactPage: React.FC = () => {
                         <FaGithub /> GitHub
                       </a>
                       <a
-                        href="https://www.linkedin.com/in/luminary-james-lee"
+                        href="https://www.linkedin.com/in/jameslee-ai-product"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}
