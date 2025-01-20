@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <FaGithub className={styles.icon} />
         </a>
         <a
-          href="https://linkedin.com/in/luminary-james-lee"
+          href="https://linkedin.com/in/jameslee-ai-product"
           target="_blank"
           rel="noopener noreferrer"
         >
