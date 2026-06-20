@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USPS ML Governance Framework — James Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --navy2: #152338;
+  --navy3: #1E3251;
+  --blue: #1A6FBF;
+  --blue2: #2589E0;
+  --teal: #0E9E7E;
+  --teal2: #13C49C;
+  --gold: #C9912A;
+  --gold2: #E8A93A;
+  --red: #C0392B;
+  --amber: #E67E22;
+  --text: #E8EDF2;
+  --text2: #9BAFC4;
+  --text3: #5C7A9A;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --surface: rgba(255,255,255,0.04);
+  --surface2: rgba(255,255,255,0.07);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--navy);color:var(--text);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,27,42,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-logo{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--teal2);letter-spacing:.06em}
+.nav-divider{width:1px;height:16px;background:var(--border2)}
+.nav-title{font-size:13px;color:var(--text2);font-weight:400}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-pill{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--text2);text-decoration:none;transition:all .15s;cursor:pointer;background:none}
+.nav-pill:hover{border-color:var(--teal2);color:var(--teal2)}
+.nav-pill.accent{background:var(--teal);border-color:var(--teal);color:white}
+.nav-pill.accent:hover{background:var(--teal2);border-color:var(--teal2)}
+
+/* HERO */
+.hero{padding:120px 24px 80px;max-width:900px;margin:0 auto;text-align:center}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--teal2);text-transform:uppercase;margin-bottom:20px}
+.hero-h1{font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.15;color:var(--text);margin-bottom:12px;letter-spacing:-.02em}
+.hero-h1 strong{font-weight:600;color:white}
+.hero-sub{font-size:16px;color:var(--text2);max-width:600px;margin:0 auto 36px;font-weight:400;line-height:1.7}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:40px}
+.hero-meta-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text3)}
+.hero-meta-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:white;font-size:13px;font-weight:500;padding:11px 22px;border-radius:6px;text-decoration:none;border:none;cursor:pointer;transition:all .15s}
+.hero-cta:hover{background:var(--teal2);transform:translateY(-1px)}
+.hero-cta-secondary{display:inline-flex;align-items:center;gap:8px;color:var(--text2);font-size:13px;padding:11px 22px;border-radius:6px;text-decoration:none;border:1px solid var(--border2);cursor:pointer;transition:all .15s;margin-left:8px;background:none}
+.hero-cta-secondary:hover{border-color:var(--text2);color:var(--text)}
+
+/* STATS BAR */
+.stats-bar{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+@media(max-width:600px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
+.stat{text-align:center;padding:16px;position:relative}
+.stat::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--border)}
+.stat:last-child::after{display:none}
+.stat-val{font-size:28px;font-weight:600;color:white;letter-spacing:-.02em;line-height:1}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:5px;letter-spacing:.03em}
+
+/* SECTIONS */
+.section{padding:72px 24px;max-width:960px;margin:0 auto}
+.section-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--teal2);text-transform:uppercase;margin-bottom:10px}
+.section-title{font-size:26px;font-weight:500;color:white;margin-bottom:8px;letter-spacing:-.01em}
+.section-sub{font-size:14px;color:var(--text2);margin-bottom:36px;max-width:560px;line-height:1.7}
+.divider{height:1px;background:var(--border);max-width:960px;margin:0 auto}
+
+/* TABS */
+.tab-nav{display:flex;gap:2px;margin-bottom:24px;background:var(--surface);border-radius:8px;padding:4px;width:fit-content;flex-wrap:wrap}
+.tab-btn{font-size:12px;font-weight:500;padding:7px 16px;border-radius:6px;border:none;background:none;color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab-btn.active{background:var(--navy3);color:white;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.card-title{font-size:13px;font-weight:600;color:white;margin-bottom:6px}
+.card-body{font-size:12px;color:var(--text2);line-height:1.65}
+.card.accent{border-color:var(--teal);border-left:3px solid var(--teal2)}
+
+/* USE CASES TABLE */
+.uc-header{display:grid;grid-template-columns:1fr 72px 72px 72px;gap:8px;padding:8px 12px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2)}
+.uc-row{display:grid;grid-template-columns:1fr 72px 72px 72px;gap:8px;padding:12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;border-radius:6px}
+.uc-row:hover{background:var(--surface)}
+.uc-row.expanded{background:var(--surface2)}
+.uc-name{font-size:13px;font-weight:500;color:white}
+.uc-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.uc-chips{margin-top:5px;display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;border:1px solid var(--border2);color:var(--text3)}
+.chip.aws{border-color:#FF9900;color:#FF9900}
+.chip.azure{border-color:#2589E0;color:#2589E0}
+.chip.gcp{border-color:#4285F4;color:#4285F4}
+.chip.hybrid{border-color:var(--gold2);color:var(--gold2)}
+.uc-score{text-align:center;font-size:15px;font-weight:600}
+.uc-score-lbl{text-align:center;font-size:10px;color:var(--text3);margin-top:1px}
+.uc-detail{display:none;padding:12px;margin:0 0 4px;background:rgba(14,158,126,0.06);border-radius:6px;border-left:2px solid var(--teal);grid-column:1/-1}
+.uc-detail.open{display:grid;grid-column:1/-1}
+.uc-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:580px){.uc-detail-grid{grid-template-columns:1fr}}
+.uc-detail-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal2);margin-bottom:4px}
+.uc-detail-val{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* LIFECYCLE */
+.lifecycle-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.lifecycle-row:last-child{border-bottom:none}
+.lc-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px}
+.lc-sa{background:rgba(14,158,126,0.15);color:var(--teal2);border:1px solid var(--teal)}
+.lc-ml{background:rgba(37,137,224,0.15);color:var(--blue2);border:1px solid var(--blue)}
+.lc-sh{background:rgba(201,145,42,0.15);color:var(--gold2);border:1px solid var(--gold)}
+.lc-title{font-size:13px;font-weight:500;color:white;margin-bottom:3px}
+.lc-desc{font-size:11px;color:var(--text2);line-height:1.6}
+.owner-badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;margin-top:5px}
+.ob-sa{background:rgba(14,158,126,0.15);color:var(--teal2)}
+.ob-ml{background:rgba(37,137,224,0.15);color:var(--blue2)}
+.ob-sh{background:rgba(201,145,42,0.15);color:var(--gold2)}
+
+/* ASSESSMENT */
+.assess-row{display:grid;grid-template-columns:140px 1fr 90px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.assess-row:last-child{border-bottom:none}
+.assess-label{font-size:11px;font-weight:600;color:var(--text2);letter-spacing:.03em}
+.assess-q{font-size:12px;color:var(--text)}
+@media(max-width:600px){.assess-row{grid-template-columns:1fr;gap:5px}}
+select{font-size:12px;padding:6px 10px;border:1px solid var(--border2);border-radius:6px;background:var(--navy2);color:var(--text);width:100%;cursor:pointer}
+select:focus{outline:none;border-color:var(--teal)}
+.verdict{background:var(--surface2);border-radius:8px;padding:14px 16px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.verdict-score{font-size:30px;font-weight:600;color:white;min-width:60px;text-align:right}
+.verdict-text{font-size:12px;color:var(--text2)}
+.verdict-label{font-size:13px;font-weight:500;margin-bottom:3px}
+.progress{height:4px;background:var(--border2);border-radius:2px;margin-top:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width .4s,background .4s}
+
+/* GOVERNANCE */
+.gov-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:8px;border-left:2px solid var(--navy3)}
+.gov-item.critical{border-left-color:var(--teal)}
+.gov-title{font-size:13px;font-weight:600;color:white;margin-bottom:5px}
+.gov-body{font-size:12px;color:var(--text2);line-height:1.65}
+
+/* PRODUCTION PROOF */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.proof-grid{grid-template-columns:1fr}}
+.proof-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;border-top:2px solid var(--teal)}
+.proof-name{font-size:12px;font-weight:600;color:var(--teal2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.proof-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px}
+.proof-chips{display:flex;flex-wrap:wrap;gap:4px}
+
+/* CLOSING */
+.closing{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 24px;text-align:center}
+.closing-h{font-size:22px;font-weight:500;color:white;margin-bottom:8px;letter-spacing:-.01em}
+.closing-sub{font-size:14px;color:var(--text2);margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto}
+.contact-row{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.contact-row a{color:var(--teal2);text-decoration:none}
+.contact-row a:hover{color:var(--teal)}
+
+/* FOOTER */
+footer{padding:20px 24px;text-align:center;font-size:11px;color:var(--text3);font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo" style="text-decoration:none">← JAMES LEE</a>
+    <div class="nav-divider"></div>
+    <span class="nav-title">USPS ML Governance Framework</span>
+  </div>
+  <div class="nav-right">
+    <a href="#use-cases" class="nav-pill">Use cases</a>
+    <a href="#lifecycle" class="nav-pill">SA lifecycle</a>
+    <a href="#ml-models" class="nav-pill">ML models</a>
+    <a href="#agentic" class="nav-pill">Agentic</a>
+    <a href="#governance" class="nav-pill">Governance</a>
+    <a href="mailto:jameslee77@gmail.com" class="nav-pill accent">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Solutions Architect IV · Job NB12361215</div>
+  <h1 class="hero-h1">ML governance at<br><strong>USPS scale</strong></h1>
+  <p class="hero-sub">A concrete framework for how the Solutions Architecture function governs machine learning integration across Delivering for America — from use case intake through production deployment and deprecation.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><div class="hero-meta-dot"></div>14 prioritized use cases</div>
+    <div class="hero-meta-item"><div class="hero-meta-dot"></div>8-stage SA lifecycle</div>
+    <div class="hero-meta-item"><div class="hero-meta-dot"></div>Production-proven patterns</div>
+    <div class="hero-meta-item"><div class="hero-meta-dot"></div>AWS · Azure · GCP mapped</div>
+  </div>
+  <div>
+    <a href="#use-cases" class="hero-cta">Explore the framework ↓</a>
+    <a href="mailto:jameslee77@gmail.com" class="hero-cta-secondary">Get in touch</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">9</div><div class="stat-lbl">Years at USPS HQ</div></div>
+  <div class="stat"><div class="stat-val">$220M+</div><div class="stat-lbl">Programs architected</div></div>
+  <div class="stat"><div class="stat-val">Zero</div><div class="stat-lbl">Audit deficiencies — full tenure</div></div>
+  <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Production AI systems live</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- USE CASES -->
+<div class="section" id="use-cases">
+  <div class="section-eyebrow">ML use case assessment</div>
+  <h2 class="section-title">Prioritized USPS AI/ML initiatives</h2>
+  <p class="section-sub">Each use case scored on business impact and delivery feasibility. Click any row for the SA architecture note and governance considerations.</p>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="filterUC('all',this)">All</button>
+    <button class="tab-btn" onclick="filterUC('operations',this)">Operations</button>
+    <button class="tab-btn" onclick="filterUC('customer',this)">Customer</button>
+    <button class="tab-btn" onclick="filterUC('compliance',this)">Compliance</button>
+    <button class="tab-btn" onclick="filterUC('employee',this)">Employee</button>
+    <button class="tab-btn" onclick="filterUC('dev',this)">Dev / Tech</button>
+  </div>
+
+  <div class="uc-header">
+    <div>Use case</div>
+    <div style="text-align:center">Impact</div>
+    <div style="text-align:center">Feasibility</div>
+    <div style="text-align:center">Priority</div>
+  </div>
+  <div id="uc-list"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LIFECYCLE -->
+<div class="section" id="lifecycle">
+  <div class="section-eyebrow">ML lifecycle ownership</div>
+  <h2 class="section-title">SA vs. ML engineer — who owns what</h2>
+  <p class="section-sub">Eight stages from problem framing to deprecation. The SA owns the governance layer at every critical stage — not the model itself.</p>
+
+  <div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--teal);border:1px solid var(--teal2)"></div>SA owns</div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--blue);border:1px solid var(--blue2)"></div>ML engineer owns</div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:50%;background:var(--gold);border:1px solid var(--gold2)"></div>Shared — SA sign-off required</div>
+  </div>
+
+  <div id="lifecycle-list"></div>
+
+  <div style="background:rgba(14,158,126,0.08);border:1px solid rgba(14,158,126,0.2);border-radius:8px;padding:14px 16px;margin-top:16px">
+    <div style="font-size:11px;font-weight:600;color:var(--teal2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">The 8 questions an SA asks about any ML system</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 20px">
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">What data is consumed — classified and authorized?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">What happens when confidence is low — what's the fallback?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">What decision does this influence or automate?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">How do we detect drift 6 months post-deployment?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">What metric are we optimizing — is it the right one?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid var(--border)">Can we explain a specific output to an auditor?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0">What does a false positive cost vs. a false negative?</div>
+      <div style="font-size:11px;color:var(--text2);padding:3px 0">What is the deprecation condition — who has authority?</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ASSESSMENT SCORER -->
+<div class="section">
+  <div class="section-eyebrow">Governance intake tool</div>
+  <h2 class="section-title">ML use case assessment scorer</h2>
+  <p class="section-sub">Score any proposed USPS AI initiative across six dimensions at governance intake — before development begins. SA owns this gate.</p>
+  <div id="assess-dims"></div>
+  <div class="verdict" id="verdict-box">
+    <div>
+      <div class="verdict-label" id="verdict-label" style="color:var(--text2)">Score each dimension above</div>
+      <div class="verdict-text" id="verdict-sub"></div>
+      <div class="progress"><div class="progress-fill" id="progress-fill" style="width:0%;background:var(--text3)"></div></div>
+    </div>
+    <div class="verdict-score" id="verdict-score">—</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GOVERNANCE -->
+<div class="section" id="governance">
+  <div class="section-eyebrow">Governance framework</div>
+  <h2 class="section-title">Six non-negotiable controls</h2>
+  <p class="section-sub">Every ML system approved for USPS production must satisfy all six. These are SA deliverables — defined before deployment, not discovered after.</p>
+  <div id="gov-list"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ML MODEL TYPES -->
+<div class="section" id="ml-models">
+  <div class="section-eyebrow">ML model types</div>
+  <h2 class="section-title">Seven model categories mapped to USPS</h2>
+  <p class="section-sub">SA fluency means knowing which model type fits which problem — and what governance questions each one requires. Click any card to expand.</p>
+  <div id="model-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- AGENTIC FRAMEWORKS -->
+<div class="section" id="agentic">
+  <div class="section-eyebrow">Agentic AI frameworks</div>
+  <h2 class="section-title">Framework selection for USPS</h2>
+  <p class="section-sub">The framework choice is a governance decision before it's a technical one. For any workload touching FISMA or PCI data, the answer starts with managed cloud-native — not open-source. Click any framework to expand.</p>
+  <div style="background:rgba(201,145,42,0.08);border:1px solid rgba(201,145,42,0.2);border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:var(--text2);line-height:1.6">
+    <span style="color:var(--gold2);font-weight:600">USPS default rule:</span> Start with AWS Bedrock Agents or Azure AI Foundry for any regulated workload. Compliance posture, audit logging, and enterprise access controls are pre-built. Move to custom frameworks only when you can name the specific capability gap that requires it.
+  </div>
+  <div id="fw-grid" style="display:flex;flex-direction:column;gap:8px"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PRODUCTION PROOF -->
+<div class="section">
+  <div class="section-eyebrow">Production evidence</div>
+  <h2 class="section-title">These patterns are already in production</h2>
+  <p class="section-sub">The governance framework above is not theoretical. Every pattern is drawn from real AI systems built and deployed across regulated environments.</p>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-name">CaseZero</div>
+      <div class="proof-desc">AI lien resolution for plaintiff PI law firms. Processes 80+ active cases simultaneously. Data lineage, audit trail, and human-in-the-loop review built in from day one.</div>
+      <div class="proof-chips"><span class="chip aws">AWS</span><span class="chip" style="border-color:var(--teal);color:var(--teal2)">RAG</span><span class="chip">Legal AI</span></div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-name">Sanctr</div>
+      <div class="proof-desc">Prior authorization automation for healthcare. HIPAA-eligible architecture. Reduces 45-minute PA appeal to under 3 seconds. Evaluation standards agreed with clinical stakeholders before deployment.</div>
+      <div class="proof-chips"><span class="chip aws">AWS</span><span class="chip" style="border-color:var(--amber);color:var(--amber)">HIPAA</span><span class="chip">NLP</span></div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-name">LogixVast</div>
+      <div class="proof-desc">Multi-carrier shipping intelligence. Real-time rate optimization and anomaly detection. Drift monitoring from day one — not retrofitted after performance complaints.</div>
+      <div class="proof-chips"><span class="chip aws">AWS</span><span class="chip">Anomaly detection</span><span class="chip">Real-time</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <h2 class="closing-h">Ready to continue the conversation</h2>
+  <p class="closing-sub">Nine years of USPS institutional knowledge. Three years of production AI governance. The right moment to bring both back.</p>
+  <div class="contact-row">
+    <span>James Lee  ·  MBA, PMP</span>
+    <span>(301) 825-4242</span>
+    <a href="mailto:jameslee77@gmail.com">jameslee77@gmail.com</a>
+    <a href="https://linkedin.com/in/james-ai-product" target="_blank">linkedin.com/in/james-ai-product</a>
+  </div>
+</div>
+
+<footer>Built as a follow-up to the SA IV interview · Job NB12361215 · James Lee · 2026</footer>
+
+<script>
+const ucs=[
+  {name:"AI governance framework",sub:"Evaluation, audit trail, drift monitoring for all ML systems",cat:"compliance",impact:10,feasibility:7,cloud:["hybrid"],sa:"This is the prerequisite for every other ML initiative on this list. SA owns entirely. The governance playbook framework built at USPS is the foundation — AI governance is the next version of that same problem.",how:"Cross-cutting governance platform defining data classification, lineage, evaluation standards, drift thresholds, and deprecation conditions for all USPS ML systems.",saQ:"Is there an existing framework or is this greenfield? How many AI pilots are currently running without governance oversight?"},
+  {name:"Delivery time prediction",sub:"Customer-facing ETA using real-time scan event data",cat:"customer",impact:9,feasibility:8,cloud:["aws","azure"],sa:"Model output surfaces to customers — confidence intervals matter. A model that says '3pm' when it means '2pm–8pm' erodes trust faster than no prediction. SA designs the confidence interval display strategy, not just the prediction pipeline.",how:"Time series forecasting on MDD-TR scan event sequences. Real-time feature injection from carrier device stream. AWS SageMaker DeepAR or Azure ML.",saQ:"What is the current ETA accuracy baseline? What confidence threshold triggers a wider delivery window shown to the customer?"},
+  {name:"Package routing optimization",sub:"ML-based last-mile and facility routing decisions",cat:"operations",impact:9,feasibility:7,cloud:["aws","gcp"],sa:"Feature store required for low-latency signal serving at inference time. Fallback to deterministic routing rules when model confidence is low — never let AI uncertainty block a package. Staged rollout: 5%→20%→50%→100% of volume with evaluation gate at each stage.",how:"Supervised learning on historical routing decisions. Real-time feature store. AWS SageMaker or GCP Vertex AI for model serving.",saQ:"What is the latency requirement? What does a wrong routing decision cost vs. the cost of holding for deterministic fallback?"},
+  {name:"Fraud detection — payment systems",sub:"ML classification layer replacing rule-based fraud detection",cat:"compliance",impact:9,feasibility:6,cloud:["aws"],sa:"PCI DSS surface — highest compliance rigor. Data lineage must document every training data source. False positive cost (legitimate transaction blocked) vs. false negative cost (fraud passes through) must be explicitly agreed and documented before any model is trained.",how:"Supervised binary classification on labeled transaction history. Class imbalance handling required — fraud events are rare. AWS SageMaker within existing payment system architecture.",saQ:"What is the current false positive rate on the rule-based system? What business metric defines success?"},
+  {name:"AI call center — customer service",sub:"NLP voice agent for passport and general customer care",cat:"customer",impact:8,feasibility:9,cloud:["azure"],sa:"Azure AI Foundry — already the CIO direction per current investments. PII in voice transcripts requires anonymization before any model training use. Human escalation trigger must be defined before deployment: what topic type or confidence threshold routes to a live agent?",how:"Azure OpenAI Service + Azure AI Foundry. Intent classification → response generation. Call transcript logging with PII scrubbing pipeline.",saQ:"What does the audit trail look like for a customer complaint about an AI response? What is the escalation trigger?"},
+  {name:"Legacy COBOL documentation",sub:"LLM-assisted mainframe code annotation",cat:"dev",impact:8,feasibility:7,cloud:["aws","azure"],sa:"Training corpus is USPS internal source code — data boundary is critical. No external model training on COBOL source under any circumstances. RAG pattern over codebase with human review gate before any annotation is committed to the repository.",how:"LLM with RAG over COBOL codebase. Claude via AWS Bedrock (keeps within FISMA compliance boundary). Chunking by function/paragraph. Human-in-the-loop before commit.",saQ:"What is the authorized use of the COBOL source code? Who reviews model-generated annotations? What is the review SLA?"},
+  {name:"Predictive maintenance — sorting",sub:"Equipment failure prediction via IoT sensor data",cat:"operations",impact:8,feasibility:6,cloud:["aws","gcp"],sa:"Edge vs. cloud inference decision is critical — sorting equipment failure has immediate operational impact. Sensor data volume at SDC scale requires streaming pipeline design before model selection. Drift monitoring is especially important here: equipment aging changes sensor baselines.",how:"Time series anomaly detection on equipment sensor streams. AWS IoT Greengrass for edge processing + SageMaker for model training. PagerDuty or CloudWatch alerting.",saQ:"What is the false alarm rate tolerance for maintenance alerts? What is the sensor data retention requirement?"},
+  {name:"HR workforce analytics",sub:"Attrition prediction and workforce planning for 600K employees",cat:"employee",impact:7,feasibility:7,cloud:["azure"],sa:"Employee data is highest-sensitivity PII — data governance boundary must be defined before any model sees HR data. Azure AI Foundry via HERO/Cornerstone integration. Model outputs that influence HR decisions require the strictest human-in-the-loop design.",how:"Supervised classification on anonymized HR event data. Azure ML with M365/Cornerstone integration. Outputs surface as signals to HR managers, never automated decisions.",saQ:"What HR decisions will this model influence? What is the anonymization strategy for training data? Who reviews model outputs before any action is taken?"},
+  {name:"MDD-TR scan anomaly detection",sub:"Carrier device data quality and fraud flagging",cat:"operations",impact:7,feasibility:8,cloud:["aws"],sa:"Offline-first device design — scan events queue locally during connectivity gaps and sync on reconnection. Idempotent ingestion at backend is non-negotiable: device retries must not trigger duplicate anomaly flags. SA designs the deduplication layer before any model work begins.",how:"Unsupervised anomaly detection on carrier scan event patterns. AWS Lookout for Metrics or SageMaker Random Cut Forest. Alerting via CloudWatch.",saQ:"What defines 'normal' for a carrier scan pattern? How does the baseline get updated as routes change seasonally?"},
+  {name:"S&DC consolidation data layer",sub:"Unified operational view across merged Sorting & Delivery Centers",cat:"operations",impact:9,feasibility:6,cloud:["aws","hybrid"],sa:"Systems consolidation is the hard part — not the UI. Each legacy Delivery Unit has undocumented data dependencies that only surface during parallel run. SA must map every system each facility depends on before designing the unified data model. Run in parallel before any cutover.",how:"Data integration across legacy facility systems. Unified schema for routing, staffing, equipment inventory. Parallel run phase to validate equivalence before cutover.",saQ:"How many legacy systems does each DU depend on? What is the data residency requirement for consolidated facility data?"},
+  {name:"Informed Delivery personalization",sub:"ML-driven delivery notification and marketing optimization",cat:"customer",impact:8,feasibility:8,cloud:["aws","gcp"],sa:"Customer behavioral data used for personalization must have explicit authorized use documentation. Opt-out mechanism required by design. Model outputs influence marketing decisions — evaluation must include disparate impact analysis across customer segments.",how:"Collaborative filtering on delivery and engagement history. AWS SageMaker or GCP Vertex AI. A/B framework for measuring personalization lift vs. baseline.",saQ:"What is the opt-out mechanism? Has a disparate impact analysis been scoped for the evaluation framework?"},
+  {name:"Customer sentiment analysis",sub:"NLP on service interactions to surface CSAT drivers",cat:"customer",impact:7,feasibility:9,cloud:["gcp","azure"],sa:"Voice and text interaction data contains PII — anonymization required before any NLP model training. GCP Natural Language API or Azure Text Analytics for baseline. Custom fine-tuning only after baseline validation and data use authorization.",how:"NLP classification on anonymized interaction transcripts. GCP Natural Language API or Azure Text Analytics. Dashboard surfacing top complaint categories by facility and region.",saQ:"What is the anonymization pipeline before transcripts enter the NLP model? What is the refresh cadence for the sentiment dashboard?"},
+  {name:"AI governance framework",sub:"Evaluation, audit trail, drift monitoring for all ML systems",cat:"compliance",impact:10,feasibility:7,cloud:["hybrid"],sa:"Prerequisite for all other initiatives. Without this, every ML deployment is ungoverned technical debt in progress.",how:"Platform approach: approved data access patterns, evaluation framework, serving infrastructure, audit log standard. Every ML project runs inside this platform.",saQ:"What AI pilots are currently running outside a governance framework? That is the first thing to document and bring under governance."},
+];
+
+const uniqueUCs=ucs.filter((u,i,a)=>a.findIndex(x=>x.name===u.name&&x.cat===u.cat)===i);
+let activeFilter='all';
+let openUC=null;
+
+function scoreColor(s){
+  if(s>=8.5)return'#13C49C';
+  if(s>=7)return'#E8A93A';
+  return'#E74C3C';
+}
+
+function cloudChip(c){
+  const map={aws:'aws',azure:'azure',gcp:'gcp',hybrid:'hybrid'};
+  const label={aws:'AWS',azure:'Azure',gcp:'GCP',hybrid:'Hybrid'};
+  return`<span class="chip ${map[c]||''}">${label[c]||c}</span>`;
+}
+
+function renderUC(){
+  const filtered=activeFilter==='all'?uniqueUCs:uniqueUCs.filter(u=>u.cat===activeFilter);
+  const sorted=[...filtered].sort((a,b)=>(b.impact*0.6+b.feasibility*0.4)-(a.impact*0.6+a.feasibility*0.4));
+  const el=document.getElementById('uc-list');
+  el.innerHTML=sorted.map((u,i)=>{
+    const pri=(u.impact*0.6+u.feasibility*0.4).toFixed(1);
+    const isOpen=openUC===u.name+u.cat;
+    return`<div>
+      <div class="uc-row ${isOpen?'expanded':''}" onclick="toggleUC('${u.name+u.cat}')">
+        <div>
+          <div class="uc-name">${u.name}</div>
+          <div class="uc-sub">${u.sub}</div>
+          <div class="uc-chips">${(u.cloud||[]).map(cloudChip).join('')}<span class="chip">${u.cat}</span></div>
+        </div>
+        <div><div class="uc-score" style="color:${scoreColor(u.impact)}">${u.impact}/10</div><div class="uc-score-lbl">impact</div></div>
+        <div><div class="uc-score" style="color:${scoreColor(u.feasibility)}">${u.feasibility}/10</div><div class="uc-score-lbl">feasibility</div></div>
+        <div><div class="uc-score" style="color:${scoreColor(parseFloat(pri))}">${pri}</div><div class="uc-score-lbl">priority</div></div>
+      </div>
+      ${isOpen?`<div class="uc-detail open">
+        <div class="uc-detail-grid">
+          <div><div class="uc-detail-label">SA architecture note</div><div class="uc-detail-val">${u.sa}</div></div>
+          <div>
+            <div><div class="uc-detail-label">How it works</div><div class="uc-detail-val">${u.how}</div></div>
+            <div style="margin-top:10px"><div class="uc-detail-label">Key SA questions</div><div class="uc-detail-val">${u.saQ}</div></div>
+          </div>
+        </div>
+      </div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function toggleUC(key){
+  openUC=openUC===key?null:key;
+  renderUC();
+}
+
+function filterUC(cat,btn){
+  activeFilter=cat;
+  openUC=null;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderUC();
+}
+renderUC();
+
+const lifecycle=[
+  {owner:'sa',num:'1',title:'Problem framing & compliance surface mapping',desc:'SA defines the business metric, maps the compliance surface (PCI, FISMA, PII exposure), and documents what data the proposed model will consume and what decision it will influence. Nothing proceeds without this.'},
+  {owner:'sa',num:'2',title:'Data governance & access design',desc:'SA owns entirely. Data classification, lineage documentation, authorized use registry, access controls, audit trail design. The data governance playbook framework applies here directly. This is the stage that makes everything else auditable.'},
+  {owner:'ml',num:'3',title:'Data preparation & feature engineering',desc:'ML engineer work. Cleaning, normalization, feature creation, train/validation/test splits. SA reviews the data use authorization — is the ML team using data within the approved governance boundary?'},
+  {owner:'ml',num:'4',title:'Model selection & training',desc:'ML engineer work. Algorithm selection, hyperparameter tuning, training runs, cross-validation. SA does not own this. SA verifies training data stays within the compliance boundary and compute runs in the approved environment.'},
+  {owner:'shared',num:'5',title:'Evaluation framework design — SA sign-off required',desc:'SA defines the business metric and the production approval threshold. ML engineer defines technical metrics (precision, recall, AUC, F1). Both must agree and document before any pilot deployment begins. This is a formal SA gate.'},
+  {owner:'sa',num:'6',title:'Integration architecture',desc:'SA owns entirely. API design between model serving and consuming systems. Fallback to deterministic rules when model confidence is low. Circuit breakers. Audit logging of model inputs, outputs, and downstream actions triggered.'},
+  {owner:'shared',num:'7',title:'Staged deployment & validation — SA sign-off required',desc:'SA defines the staged rollout plan (5%→20%→50%→100%) and the evaluation criteria at each gate. ML engineer monitors technical metrics. SA sign-off required before each stage expansion. No stage skipping.'},
+  {owner:'sa',num:'8',title:'Drift monitoring, governance & deprecation',desc:'SA owns entirely. Drift detection thresholds, alerting owners, deprecation conditions defined at approval time. Model version control and audit trail for regulatory review. The model lifecycle does not end at deployment.'},
+];
+
+const ownerCls={sa:'lc-sa',ml:'lc-ml',shared:'lc-sh'};
+const ownerBadge={sa:'ob-sa',ml:'ob-ml',shared:'ob-sh'};
+const ownerLabel={sa:'SA owns',ml:'ML engineer owns',shared:'Shared — SA sign-off required'};
+
+document.getElementById('lifecycle-list').innerHTML=lifecycle.map(s=>`
+  <div class="lifecycle-row">
+    <div class="lc-num ${ownerCls[s.owner]}">${s.num}</div>
+    <div>
+      <div class="lc-title">${s.title}</div>
+      <div class="lc-desc">${s.desc}</div>
+      <span class="owner-badge ${ownerBadge[s.owner]}">${ownerLabel[s.owner]}</span>
+    </div>
+  </div>
+`).join('');
+
+const dims=[
+  {label:'Business impact',q:'Does this directly improve delivery speed, cost reduction, employee productivity, or customer satisfaction at measurable USPS scale?'},
+  {label:'Data availability',q:'Is the required training and inference data clean, accessible, classified, and authorized for ML use under the data governance framework?'},
+  {label:'Compliance manageability',q:'How contained is the FISMA/PCI/PII exposure? (5 = low risk and well-understood, 1 = high risk or uncharted compliance territory)'},
+  {label:'Adoption likelihood',q:'Will the end users — carriers, facility staff, payment teams, customers — trust and use this system in their actual daily workflow?'},
+  {label:'Build feasibility',q:'Can USPS architecture and engineering deliver this to production within 12 months given current team capacity and DFA commitments?'},
+  {label:'Governance readiness',q:'Are audit trail, evaluation standards, drift monitoring, and deprecation conditions definable before deployment begins?'},
+];
+const scores=new Array(dims.length).fill(null);
+
+document.getElementById('assess-dims').innerHTML=dims.map((d,i)=>`
+  <div class="assess-row">
+    <div class="assess-label">${d.label}</div>
+    <div class="assess-q">${d.q}</div>
+    <div>
+      <select onchange="setScore(${i},this.value)">
+        <option value="">—</option>
+        ${[1,2,3,4,5].map(n=>`<option>${n}</option>`).join('')}
+      </select>
+    </div>
+  </div>
+`).join('');
+
+function setScore(i,v){
+  scores[i]=v===''?null:parseInt(v);
+  const filled=scores.filter(s=>s!==null);
+  if(!filled.length){
+    document.getElementById('verdict-score').textContent='—';
+    document.getElementById('verdict-label').textContent='Score each dimension above';
+    document.getElementById('verdict-sub').textContent='';
+    document.getElementById('progress-fill').style.width='0%';
+    return;
+  }
+  const total=scores.reduce((a,b)=>a+(b||0),0);
+  const max=dims.length*5;
+  const pct=Math.round(total/max*100);
+  document.getElementById('verdict-score').textContent=`${total}/${max}`;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  let label,sub,color;
+  if(pct>=75){label='High priority';sub='Pursue with full governance framework from intake stage.';color='var(--teal2)';}
+  else if(pct>=55){label='Medium priority';sub='Pilot with limited scope and defined success criteria first.';color='var(--gold2)';}
+  else{label='Low priority';sub='Address data readiness or compliance gaps before investing.';color='#E74C3C';}
+  document.getElementById('verdict-label').textContent=label;
+  document.getElementById('verdict-label').style.color=color;
+  document.getElementById('verdict-sub').textContent=sub;
+  document.getElementById('progress-fill').style.background=color;
+}
+
+const govItems=[
+  {title:'Data lineage — required before training begins',body:'Every data element a model consumes must have a documented path from source to training pipeline. If a model produces a wrong output six months post-deployment, you must be able to trace it back to the training data that caused it. This is SA work, completed before any ML engineer touches the data.',critical:true},
+  {title:'Authorized use registry',body:'Explicit record of which data sources are approved for: model training, retrieval/inference context, real-time tool access, or none. Any data source not on the registry cannot be used. Enforced at the governance intake stage, not discovered post-deployment during an audit.',critical:true},
+  {title:'Evaluation standards — agreed before deployment, not after',body:'Business metric and production approval threshold defined before any pilot begins. A model that looks good in a sandbox but cannot meet a pre-agreed production threshold does not ship. SA owns this gate. This is the control that prevents "it worked in testing" from becoming a production incident.',critical:true},
+  {title:'Audit trail — every inference event that influences a decision is logged',body:'Every model output that influences an operational decision — routing, payment processing, HR action, customer communication — is logged with: input features, model version, output, confidence score, timestamp, and downstream action taken. Retention period tied to compliance surface (SOX: 7 years, FISMA: per NIST guidance).',critical:true},
+  {title:'Drift monitoring — from day one, not day 180',body:'Input distributions change. Seasonal volume shifts, new product categories, route restructuring, facility consolidation — all change what the model sees in production. Drift detection is designed into the deployment architecture, not retrofitted after the first performance complaint surfaces.',critical:true},
+  {title:'Deprecation conditions — defined at approval time',body:'Every ML system approved for production has a deprecation condition defined at the time of approval: what drift threshold, what business metric degradation, what compliance event triggers review or shutdown. If you cannot define when a model should stop being used, you should not deploy it.',critical:true},
+];
+
+document.getElementById('gov-list').innerHTML=govItems.map(g=>`
+  <div class="gov-item ${g.critical?'critical':''}">
+    <div class="gov-title">${g.title}</div>
+    <div class="gov-body">${g.body}</div>
+  </div>
+`).join('');
+
+// ML MODEL TYPES
+const models=[
+  {name:'Supervised learning',sub:'Classification & regression',color:'#2589E0',
+   usps:'Fraud detection (transaction = fraud/not-fraud), delivery exception prediction, HR attrition risk scoring, package damage classification from scan data.',
+   how:'Learns from thousands of labeled examples. Finds patterns. Predicts labels or values on new inputs. Most common ML category — well understood, well governed.',
+   saGov:'Class imbalance: if only 0.1% of transactions are fraud, a model that always says "not fraud" is 99.9% accurate but useless. SA ensures the right metric is agreed before training begins — not accuracy, but precision/recall/F1 for the business problem.',
+   saQ:'What is the class distribution in training data? What metric are we optimizing? What does a false positive cost vs. a false negative?',
+   cloud:'AWS SageMaker · Azure ML · GCP Vertex AI'},
+  {name:'Anomaly detection',sub:'Unsupervised outlier identification',color:'#0E9E7E',
+   usps:'MDD-TR carrier device anomalies, payment transaction anomalies, package routing deviations, sorting equipment sensor drift for predictive maintenance.',
+   how:'Model learns what "normal" looks like from unlabeled data. Flags anything far outside that distribution as an anomaly. No labeled anomaly examples needed.',
+   saGov:'What defines normal? If normal changes seasonally (holiday volume spikes), the baseline window must be updated — a static model trained on Q2 data will fire false alarms all December. Threshold setting is an SA-level decision: too sensitive = alert fatigue, too loose = real problems missed.',
+   saQ:'How does the normal baseline get updated? Who owns the alert threshold? What is the false positive rate at the proposed threshold and what is the operational cost of a false alarm?',
+   cloud:'AWS Lookout for Metrics · SageMaker Random Cut Forest · Azure Anomaly Detector · GCP Vertex AI'},
+  {name:'Time series forecasting',sub:'Predicting future values from historical sequences',color:'#C9912A',
+   usps:'Package volume forecasting by facility (staffing/capacity planning), delivery window ETAs for Informed Delivery, mail volume seasonality for S&DC planning, equipment failure horizon prediction.',
+   how:'Model learns trends, seasonality, and cyclical patterns from historical sequences. Projects forward combining all these signals. Monday is always busier, December is always busiest, growth trend is 5% annually.',
+   saGov:'Data freshness is critical — a forecasting model trained on last year\'s data may miss structural shifts like a new SDC opening or a major e-commerce volume change. SA must define the retraining cadence and the staleness threshold before deployment.',
+   saQ:'What is the forecast horizon? What is the acceptable error tolerance at that horizon? How does the model handle distribution shift when a new facility opens or routes restructure?',
+   cloud:'AWS SageMaker DeepAR · Azure ML with Prophet/LSTM · GCP BigQuery ML · Vertex AI'},
+  {name:'Natural language processing',sub:'Understanding and generating human language',color:'#534AB7',
+   usps:'AI call center (passport & customer care voice agent), customer complaint classification, legacy COBOL code documentation, employee HR chatbot, customer sentiment analysis from interaction transcripts.',
+   how:'Transformer models (GPT, BERT) learn statistical relationships between words across massive text corpora. "My package is missing" and "I never received my delivery" map to the same intent. Modern NLP is context-aware and handles ambiguity well.',
+   saGov:'Customer call transcripts and complaint text are PII. Data governance boundary must be defined before any NLP model sees them. Anonymization pipeline required. Hallucination risk for generative NLP — the model may produce confident but wrong answers. SA designs the human review layer for any output that affects customers.',
+   saQ:'What PII is in the training corpus? Is this generative (open-ended output) or discriminative (classification)? What is the human review process for model outputs that affect customers or employees?',
+   cloud:'Azure OpenAI Service (GPT-4, best for enterprise NLP) · AWS Bedrock (Claude) · GCP Vertex AI (Gemini)'},
+  {name:'Computer vision',sub:'Analyzing images and video for operational decisions',color:'#993C1D',
+   usps:'Package damage detection at sorting facilities via conveyor camera feeds, address label OCR and validation, barcode scan quality verification, facility safety monitoring (PPE compliance at SDCs).',
+   how:'Convolutional neural networks learn visual features — edges, shapes, textures — in layers of increasing abstraction. A damage detection model learns that specific surface deformations in images correlate with the "damaged" label.',
+   saGov:'Sorting conveyors move fast — inference needs to happen in near-real-time at the facility edge, not by sending images to cloud. Data volume is enormous: a camera at 30fps generates massive data requiring a pipeline decision before model design. SA owns the edge vs. cloud inference architecture decision.',
+   saQ:'What is the inference latency requirement? Where does inference happen — edge or cloud? How are training images labeled and by whom? What is the model\'s performance on damaged packages that do not look obviously damaged?',
+   cloud:'AWS Rekognition · SageMaker + IoT Greengrass (edge) · Azure Computer Vision · GCP Vision AI'},
+  {name:'Reinforcement learning',sub:'Agent learns by optimizing long-term reward',color:'#854F0B',
+   usps:'Route optimization (agent learns to minimize delivery time + fuel across dynamic environment), dynamic pricing for USPS shipping products, facility layout optimization for SDC sorting flow.',
+   how:'Unlike supervised learning, no labeled examples. Agent takes actions, gets a reward signal (shorter delivery time = positive reward), learns a policy that maximizes long-term reward. Requires a simulation environment to learn safely.',
+   saGov:'Highest-complexity ML category. SA must verify a simulation environment exists before any RL project begins — a real routing system cannot be the training environment. Reward design is an SA-level review: a poorly designed reward function produces unexpected behaviors (reward hacking). Most RL candidates should first be validated as simpler supervised problems.',
+   saQ:'Do we have a validated simulation environment? Has the reward function been reviewed for unintended optimization paths? Is there a supervised learning baseline that has been ruled out first?',
+   cloud:'AWS SageMaker RL · GCP Vertex AI custom · Requires significant compute — budget accordingly'},
+  {name:'LLMs + RAG',sub:'Large language models with retrieval-augmented generation',color:'#0F6E56',
+   usps:'Legacy COBOL documentation agent, internal policy search (employees query USPS policy docs), SOW and requirements drafting assistant, architecture decision record generation, governance intake automation.',
+   how:'RAG: (1) user query converted to embedding vector, (2) vector database searched for similar document chunks, (3) retrieved chunks injected into LLM prompt as context, (4) LLM generates response grounded in retrieved documents. Prevents hallucination on domain-specific knowledge.',
+   saGov:'Data boundary is the primary SA concern. What documents go into the retrieval corpus? Who can query what? A vector database containing USPS internal policy docs must have the same access controls as the source documents — access control at the chunk level, not just the document level. Chunking strategy directly affects answer quality.',
+   saQ:'What is in the retrieval corpus and who has access? What is the chunking and embedding strategy? How do we evaluate retrieval quality separately from generation quality? What is the hallucination mitigation approach for outputs that influence decisions?',
+   cloud:'AWS Bedrock + Knowledge Bases (managed RAG, FISMA boundary) · Azure AI Search + OpenAI · GCP Vertex AI Search + Gemini'},
+];
+
+let openModel=null;
+document.getElementById('model-grid').innerHTML=models.map((m,i)=>`
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s" onclick="toggleModel(${i})" id="mcard-${i}">
+    <div style="padding:14px 16px;border-left:3px solid ${m.color}">
+      <div style="font-size:13px;font-weight:600;color:white;margin-bottom:2px">${m.name}</div>
+      <div style="font-size:11px;color:var(--text3)">${m.sub}</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:6px;line-height:1.5"><b style="color:${m.color}">USPS:</b> ${m.usps}</div>
+    </div>
+    <div id="mdetail-${i}" style="display:none;padding:12px 16px;border-top:1px solid var(--border);background:var(--surface2)">
+      <div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">How it works</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${m.how}</div></div>
+      <div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">SA governance concern</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${m.saGov}</div></div>
+      <div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">Key SA questions</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${m.saQ}</div></div>
+      <div style="font-size:11px;padding:6px 10px;background:var(--surface);border-radius:6px;color:var(--text3)"><b>Cloud:</b> ${m.cloud}</div>
+    </div>
+  </div>
+`).join('');
+
+function toggleModel(i){
+  openModel=openModel===i?null:i;
+  models.forEach((_,j)=>{
+    const d=document.getElementById('mdetail-'+j);
+    if(d) d.style.display=openModel===j?'block':'none';
+  });
+}
+
+// AGENTIC FRAMEWORKS
+const frameworks=[
+  {name:'AWS Bedrock Agents',badge:'Recommended for USPS',badgeColor:'#0E9E7E',color:'#FF9900',
+   tagline:'Fully managed agentic orchestration. Native tool use, knowledge base RAG, and guardrails. FedRAMP eligible.',
+   usps:'Primary recommendation for any USPS workload touching PCI, FISMA, or payment system data. Pre-built compliance posture. Native CloudTrail audit logging. AWS Bedrock Knowledge Bases handles RAG natively.',
+   strength:'Fully managed — no infrastructure to operate. Built-in guardrails (content filtering, PII detection). CloudTrail provides the audit trail out of the box. FedRAMP eligible. Integrates directly with existing USPS AWS infrastructure.',
+   weakness:'AWS lock-in. Less flexible than LangGraph for complex custom orchestration. Model selection limited to Bedrock-available models. Harder to coordinate across independent multi-agent systems.',
+   saNote:'Preferred recommendation for USPS given existing AWS investment and FISMA posture. SA still owns the tool access control design — what each agent can call, what requires human approval, what the audit trail captures.',
+   cloud:'AWS only · GovCloud region available for highest-sensitivity workloads'},
+  {name:'Azure AI Foundry',badge:'Recommended for HR & call center',badgeColor:'#2589E0',color:'#0078D4',
+   tagline:'Microsoft\'s managed agentic platform. Deep M365 and enterprise data integration. Native Azure OpenAI Service.',
+   usps:'Natural home for USPS HR/employee agents (HERO system integration), call center AI (already the CIO direction), and any workflow touching M365 data or Entra ID identity.',
+   strength:'Native GPT-4 access via Azure OpenAI. FedRAMP High authorization. Deep M365 integration. Entra ID for agent identity and access management. Copilot Studio for lower-code agent building.',
+   weakness:'Weaker integration story for non-Microsoft data sources. Copilot Studio makes it easy for business units to build agents without architectural review — this is a governance gap that needs a policy response.',
+   saNote:'SA concern: Copilot Studio is the shadow AI risk. Easy to build, easy to bypass governance. SA must define a policy that requires architecture review before any Copilot Studio agent is deployed in a production workflow.',
+   cloud:'Azure only · Azure Government available'},
+  {name:'LangChain / LangGraph',badge:'Complex stateful workflows',badgeColor:'#534AB7',color:'#534AB7',
+   tagline:'Most widely adopted open-source framework. LangGraph adds stateful multi-agent orchestration.',
+   usps:'Best fit for custom USPS workflow agents where managed services have a specific gap — legacy code documentation agent, policy retrieval agent, internal architecture decision support.',
+   strength:'Huge ecosystem, extensive integrations, strong RAG support. LangGraph handles complex multi-step stateful flows. Most ML engineers already know it. Maximum flexibility.',
+   weakness:'No built-in FISMA compliance posture — SA must design and implement audit logging separately. Rapid version changes break implementations. Not a managed service — USPS operates the infrastructure.',
+   saNote:'Do not deploy for any USPS workload touching regulated data without a custom observability and audit layer explicitly specified in the SOW. Framework version pinning is mandatory — LangChain breaking changes are frequent.',
+   cloud:'Deploy on ECS/Lambda (AWS) · ACI/AKS (Azure) · Cloud Run (GCP) · No managed offering'},
+  {name:'Claude API — direct tool use',badge:'Simple auditable agents',badgeColor:'#0E9E7E',color:'#D4570B',
+   tagline:'Direct API with native tool use. No framework overhead. Maximum control and auditability.',
+   usps:'Best for purpose-built USPS agents where the workflow is well-defined: architecture review assistant, SOW generator, governance intake agent, policy Q&A. Used in CaseZero and Sanctr — production-proven.',
+   strength:'No framework abstraction — you see exactly what prompt goes in and what comes out. Easiest to audit. Tool use is native and well-documented. Extended thinking for complex multi-step reasoning. Available via AWS Bedrock — keeps it in FISMA boundary.',
+   weakness:'You build the orchestration layer yourself. No built-in state management or multi-agent coordination. More engineering work for complex flows.',
+   saNote:'Preferred for simple to medium complexity agents where auditability is paramount. SA owns the orchestration design explicitly — which is an advantage for governance, not a limitation.',
+   cloud:'Direct API or via AWS Bedrock (recommended for USPS — FISMA boundary maintained)'},
+  {name:'CrewAI',badge:'Non-regulated only',badgeColor:'#C0392B',color:'#993C1D',
+   tagline:'Multi-agent collaboration. Agents play roles, share tasks, delegate to each other.',
+   usps:'Prototype use only: internal architecture critique crew, SOW drafting with specialist agents reviewing each other\'s work. Not production-ready for regulated USPS workloads.',
+   strength:'Clean role-based agent design. Good for complex tasks benefiting from specialization and internal critique. Simple API, fast to prototype.',
+   weakness:'Not enterprise-hardened. No built-in compliance posture. Observability is limited — hard to audit what each agent in a crew did and why.',
+   saNote:'Do not deploy for any USPS workload touching regulated data. Appropriate for internal productivity tools and prototyping only. Must be explicitly excluded from any SOW where FISMA or PCI data is in scope.',
+   cloud:'Any cloud as containerized service · No managed offering'},
+  {name:'AutoGen',badge:'Research / experimental',badgeColor:'#854F0B',color:'#E67E22',
+   tagline:'Conversational multi-agent framework from Microsoft Research. Agents debate, critique, refine.',
+   usps:'Experimental: internal architecture critique where one agent proposes a solution, another critiques compliance gaps, a third synthesizes. Not production-ready for regulated USPS workloads.',
+   strength:'Powerful for tasks requiring internal critique and iterative refinement. Good for complex reasoning where multiple perspectives improve output quality.',
+   weakness:'Research-origin — not enterprise-hardened. Governance and observability gaps. Conversational loops can consume large token budgets without clear termination.',
+   saNote:'Cost governance is the primary SA concern. AutoGen conversations can run indefinitely without a circuit breaker. Any deployment must have explicit max-turn limits, token budgets, and timeout controls defined at the architecture level before a line of code is written.',
+   cloud:'Any cloud · No managed offering'},
+];
+
+let openFW=null;
+document.getElementById('fw-grid').innerHTML=frameworks.map((f,i)=>`
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer" onclick="toggleFW(${i})">
+    <div style="padding:14px 16px;display:flex;align-items:start;gap:12px">
+      <div style="width:10px;height:10px;border-radius:50%;background:${f.color};flex-shrink:0;margin-top:4px"></div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px">
+          <div style="font-size:13px;font-weight:600;color:white">${f.name}</div>
+          <span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:${f.badgeColor}22;color:${f.badgeColor};border:1px solid ${f.badgeColor}44">${f.badge}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2)">${f.tagline}</div>
+      </div>
+      <div style="font-size:18px;color:var(--text3);flex-shrink:0;transition:transform .2s" id="fwchev-${i}">${openFW===i?'∨':'›'}</div>
+    </div>
+    <div id="fwdetail-${i}" style="display:none;padding:12px 16px;border-top:1px solid var(--border);background:var(--surface2)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+        <div><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">USPS fit</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${f.usps}</div></div>
+        <div>
+          <div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">Strengths</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${f.strength}</div></div>
+          <div><div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">Weaknesses</div><div style="font-size:12px;color:var(--text2);line-height:1.6">${f.weakness}</div></div>
+        </div>
+      </div>
+      <div style="background:rgba(201,145,42,0.08);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;padding:8px 12px;font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:8px"><b style="color:var(--gold2)">SA governance note:</b> ${f.saNote}</div>
+      <div style="font-size:11px;padding:6px 10px;background:var(--surface);border-radius:6px;color:var(--text3)"><b>Cloud:</b> ${f.cloud}</div>
+    </div>
+  </div>
+`).join('');
+
+function toggleFW(i){
+  openFW=openFW===i?null:i;
+  frameworks.forEach((_,j)=>{
+    const d=document.getElementById('fwdetail-'+j);
+    const c=document.getElementById('fwchev-'+j);
+    if(d) d.style.display=openFW===j?'block':'none';
+    if(c) c.textContent=openFW===j?'∨':'›';
+  });
+}
+</script>
+</body>
+</html>
