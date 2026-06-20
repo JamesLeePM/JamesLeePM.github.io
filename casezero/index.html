@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseZero — AI for the Last Mile of Real Estate Law</title>
+<meta name="description" content="How James Lee designed an attorney-gated AI system for lien research — domain-first product thinking in a regulated, high-stakes legal workflow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080808;--bg2:#0d0d0d;--bg3:rgba(255,255,255,0.03);--bg4:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);
+  --text:#edeae2;--muted:#9d9890;--dim:rgba(237,234,226,0.35);
+  --gold:#c9a84c;--blue:#60a5fa;--red:#f87171;--green:#4ade80;--amber:#fbbf24;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 3rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:14px}
+.nav-logo{font-family:var(--mono);font-size:0.75rem;font-weight:500;color:var(--gold);letter-spacing:0.08em}
+.nav-div{width:1px;height:16px;background:var(--border2)}
+.nav-title{font-size:0.78rem;color:var(--muted)}
+.nav-right{display:flex;gap:1.5rem}
+.nav-right a{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;transition:color .2s}
+.nav-right a:hover{color:var(--text)}
+
+/* HERO */
+.hero{padding:120px 3rem 80px;max-width:860px;margin:0 auto}
+.hero-tag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:1.25rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:3rem}
+.hero-meta{display:flex;gap:2rem;flex-wrap:wrap}
+.meta-item{display:flex;flex-direction:column;gap:0.2rem}
+.meta-val{font-family:var(--mono);font-size:0.85rem;color:var(--text)}
+.meta-label{font-size:0.72rem;color:var(--dim)}
+
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+
+/* SECTIONS */
+.section{max-width:860px;margin:0 auto;padding:5rem 3rem}
+.section-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}
+.section h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;margin-bottom:1.5rem;line-height:1.2}
+.section p{color:var(--muted);line-height:1.8;margin-bottom:1.25rem;font-size:0.95rem}
+.section p strong{color:var(--text);font-weight:600}
+
+/* CALLOUT */
+.callout{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:6px;padding:1.5rem 1.75rem;margin:2rem 0}
+.callout p{margin:0;font-size:0.92rem;color:var(--muted);font-style:italic}
+.callout p strong{color:var(--gold);font-style:normal}
+
+/* PROBLEM GRID */
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}
+.problem-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
+.problem-card .icon{font-size:1.4rem;margin-bottom:0.75rem}
+.problem-card h4{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}
+.problem-card p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+
+/* WORKFLOW */
+.workflow{margin:2.5rem 0;display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:1.5rem;align-items:flex-start;position:relative}
+.flow-step:not(:last-child)::before{content:'';position:absolute;left:19px;top:44px;width:2px;height:calc(100% + 0px);background:var(--border)}
+.flow-num{width:40px;height:40px;border-radius:50%;border:1px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.75rem;color:var(--gold);flex-shrink:0;z-index:1}
+.flow-body{padding:0.25rem 0 2rem}
+.flow-title{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.4rem}
+.flow-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.flow-gate{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.7rem;color:var(--amber);background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:3px;padding:0.2rem 0.6rem;margin-top:0.6rem}
+
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0}
+.principle{background:var(--bg2);padding:1.75rem}
+.principle-num{font-family:var(--mono);font-size:0.7rem;color:var(--gold);margin-bottom:0.75rem}
+.principle h4{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}
+.principle p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+
+/* RISK TABLE */
+.risk-table{width:100%;border-collapse:collapse;margin:2rem 0;font-size:0.85rem}
+.risk-table th{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;text-align:left;padding:0.75rem 1rem;border-bottom:1px solid var(--border2)}
+.risk-table td{padding:0.9rem 1rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+.risk-table td:first-child{color:var(--text);font-weight:500}
+.risk-table tr:last-child td{border-bottom:none}
+.risk-table tr:hover td{background:var(--bg3)}
+.badge{display:inline-flex;align-items:center;font-family:var(--mono);font-size:0.68rem;padding:0.2rem 0.6rem;border-radius:3px;font-weight:500}
+.badge.red{color:var(--red);background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2)}
+.badge.amber{color:var(--amber);background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2)}
+.badge.green{color:var(--green);background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2)}
+
+/* LEARNINGS */
+.learnings{display:flex;flex-direction:column;gap:1.25rem;margin:2rem 0}
+.learning{display:flex;gap:1rem;align-items:flex-start}
+.learning-arrow{color:var(--gold);flex-shrink:0;font-family:var(--mono);font-size:0.9rem;margin-top:0.1rem}
+.learning-text{font-size:0.9rem;color:var(--muted);line-height:1.65}
+.learning-text strong{color:var(--text)}
+
+/* CTA */
+.cta-section{max-width:860px;margin:0 auto;padding:4rem 3rem 6rem}
+.cta-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:3rem;text-align:center}
+.cta-box h3{font-family:var(--serif);font-size:1.8rem;margin-bottom:0.75rem}
+.cta-box p{color:var(--muted);margin-bottom:2rem;font-size:0.95rem}
+.cta-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-btn{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:5px;transition:all .2s}
+.cta-btn.primary{background:var(--gold);color:#080808;font-weight:500}
+.cta-btn.primary:hover{opacity:0.88}
+.cta-btn.secondary{border:1px solid var(--border2);color:var(--muted)}
+.cta-btn.secondary:hover{border-color:var(--gold);color:var(--gold)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:0.78rem;color:var(--dim);font-family:var(--mono)}
+.footer-link{font-size:0.78rem;color:var(--muted);transition:color .2s}
+.footer-link:hover{color:var(--gold)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:680px){
+  nav{padding:0 1.5rem}
+  .hero,.section,.cta-section{padding-left:1.5rem;padding-right:1.5rem}
+  .hero{padding-top:90px}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center}
+  .risk-table{font-size:0.78rem}
+  .risk-table th,.risk-table td{padding:0.65rem 0.75rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">← JAMES LEE</a>
+    <div class="nav-div"></div>
+    <span class="nav-title">CaseZero</span>
+  </div>
+  <div class="nav-right">
+    <a href="/portfolio/">Portfolio</a>
+    <a href="/usps-ml/">USPS ML</a>
+    <a href="/about/">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="hero-tag">Case Study · Legal AI · Product Architecture</div>
+  <h1>AI for the <em>Last Mile</em><br>of Real Estate Law</h1>
+  <p class="hero-sub">
+    Lien research sits at the most dangerous intersection in real estate closing — one missed encumbrance can unwind a deal, trigger liability, and end a career. I went inside the workflow before I wrote a single line of code.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-val">Legal Tech</span><span class="meta-label">Industry</span></div>
+    <div class="meta-item"><span class="meta-val">Real Estate Attorneys</span><span class="meta-label">Primary User</span></div>
+    <div class="meta-item"><span class="meta-val">High-Stakes AI</span><span class="meta-label">Risk Profile</span></div>
+    <div class="meta-item"><span class="meta-val">Attorney-Gated</span><span class="meta-label">Output Model</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- THE PROBLEM -->
+<div class="section reveal">
+  <div class="section-label">01 — The Problem</div>
+  <h2>The Workflow Nobody Talks About</h2>
+  <p>Before a real estate deal closes, someone has to research every lien, encumbrance, judgment, and cloud on the title. That someone is usually a paralegal or junior associate — spending hours in county recorder systems, manually cross-referencing names, dates, and legal descriptions.</p>
+  <p>The work is <strong>repetitive enough to be automated</strong> but <strong>consequential enough to require a licensed attorney</strong> to stand behind it. That gap is where most legal tech fails: they either automate too much (and create liability) or too little (and create nothing).</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">⏱</div>
+      <h4>Time-Intensive</h4>
+      <p>Manual lien searches across county systems, UCC filings, and judgment databases — hours of work per file, every closing.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⚠️</div>
+      <h4>Error-Prone</h4>
+      <p>Name variations, indexing errors, and multi-county properties create gaps that human review at speed consistently misses.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⚖️</div>
+      <h4>Attorney Liability</h4>
+      <p>A missed lien isn't just a deal problem — it's a malpractice problem. The attorney signs off. The attorney bears the risk.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">📉</div>
+      <h4>Margin Compression</h4>
+      <p>High-volume closing firms run on thin margins. The hours burned in research don't scale — but the liability does.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The real insight:</strong> attorneys don't want AI to replace their judgment. They want AI to do the 80% of research that doesn't require judgment — so they can apply their expertise to the 20% that does.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- DESIGN PRINCIPLES -->
+<div class="section reveal">
+  <div class="section-label">02 — Design Principles</div>
+  <h2>What We Decided Before We Built</h2>
+  <p>Nine years in regulated federal environments taught me that the most important product decisions happen before the first sprint. CaseZero was designed around three non-negotiable constraints.</p>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <h4>Attorney in the Loop — Always</h4>
+      <p>No output that could reach a lienholder, client, or closing table is generated without an attorney review gate. The AI surfaces findings. The attorney certifies them. That line never moves.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <h4>Zero Hallucination Tolerance</h4>
+      <p>In legal research, a confident wrong answer is worse than no answer. The system is designed to surface uncertainty explicitly — flagging gaps, conflicts, and low-confidence findings rather than filling them with plausible fiction.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <h4>Audit Trail Everything</h4>
+      <p>Every AI-generated finding, every attorney review, every modification is timestamped and logged. If a closing unwinds two years later, the file tells the complete story of every decision and who made it.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- THE WORKFLOW -->
+<div class="section reveal">
+  <div class="section-label">03 — The Workflow</div>
+  <h2>How the System Actually Works</h2>
+  <p>The workflow was designed around how attorneys already think — not around what was easiest to build. Every stage has a clear owner: AI or human. There is no ambiguity about who is responsible for what.</p>
+
+  <div class="workflow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-body">
+        <div class="flow-title">Case Intake</div>
+        <div class="flow-desc">Attorney or paralegal creates a new matter — property address, parties, transaction type. The system begins assembling the research scope: which jurisdictions, which record types, which name variants to search.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-body">
+        <div class="flow-title">AI Research Phase</div>
+        <div class="flow-desc">The system works through the research checklist — liens, judgments, UCC filings, tax records, lis pendens, and more. Each finding is sourced, dated, and confidence-scored. Gaps and ambiguities are flagged explicitly, not papered over.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-body">
+        <div class="flow-title">Attorney Review Gate</div>
+        <div class="flow-desc">The attorney sees every finding with its source and confidence score. They review, modify, escalate, or clear each item. Nothing proceeds without their explicit action on every flagged issue.</div>
+        <div class="flow-gate">⚠ APPROVAL REQUIRED — attorney must clear all findings before output generation</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-body">
+        <div class="flow-title">Output Generation</div>
+        <div class="flow-desc">Only after attorney sign-off does the system generate client-facing documents. The attorney's review is embedded in the audit trail — not as a formality, but as the actual decision record.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-body">
+        <div class="flow-title">Closing File Archive</div>
+        <div class="flow-desc">Every matter is archived with the complete research trail, attorney actions, and output versions. The file is self-documenting — built for the malpractice defense that may need it years later.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- RISK ARCHITECTURE -->
+<div class="section reveal">
+  <div class="section-label">04 — Risk Architecture</div>
+  <h2>Designing for Failure, Not Just Success</h2>
+  <p>In a regulated domain, the most important design question isn't "how does this work when it works?" It's "what happens when it's wrong, and how do we know?" Every output type in CaseZero has an explicit failure mode and a designated human owner.</p>
+
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th>Output Type</th>
+        <th>Risk Level</th>
+        <th>Failure Mode</th>
+        <th>Safeguard</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lien identification</td>
+        <td><span class="badge red">HIGH</span></td>
+        <td>Missed encumbrance → closing liability</td>
+        <td>Mandatory attorney review; confidence threshold gates</td>
+      </tr>
+      <tr>
+        <td>Name variant matching</td>
+        <td><span class="badge red">HIGH</span></td>
+        <td>Wrong party → clean report on wrong person</td>
+        <td>Attorney confirms party identity before scope is set</td>
+      </tr>
+      <tr>
+        <td>Document summarization</td>
+        <td><span class="badge amber">MEDIUM</span></td>
+        <td>Hallucinated clause → incorrect legal conclusion</td>
+        <td>Source citation required; attorney reviews against original</td>
+      </tr>
+      <tr>
+        <td>Status interpretation</td>
+        <td><span class="badge amber">MEDIUM</span></td>
+        <td>Satisfied lien shown as active (or vice versa)</td>
+        <td>Date/recording number always surfaced; attorney verifies currency</td>
+      </tr>
+      <tr>
+        <td>Timeline generation</td>
+        <td><span class="badge green">LOW</span></td>
+        <td>Ordering error in chronology</td>
+        <td>Automated cross-check against source dates</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- WHAT I LEARNED -->
+<div class="section reveal">
+  <div class="section-label">05 — What I Learned</div>
+  <h2>The Decisions That Shaped the Product</h2>
+  <p>The hardest part of building in a regulated domain isn't the technology — it's resisting the pressure to ship features that feel powerful but shift risk onto the wrong party.</p>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Domain fluency before product fluency.</strong> I spent weeks inside actual closing workflows before writing a single spec. The product decisions that mattered most came from understanding what attorneys are actually afraid of — not from benchmarking other legal tech tools.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>The approval gate is the product.</strong> Early instinct was to minimize friction. The right instinct was to make the review gate feel authoritative — because that's what makes attorneys trust the output. Friction at the right moment is a feature.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Uncertainty is more valuable than false confidence.</strong> "I found 3 liens and flagged 2 items I couldn't resolve" is a better answer than "I found 3 liens." Surfacing uncertainty is the trust mechanism — not a weakness to hide.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>The audit trail isn't a compliance checkbox.</strong> It's the product's memory, its defensibility, and its differentiation. Building it right from day one — not as a log but as a decision record — changed how attorneys thought about what the system was actually doing for them.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Regulated industry buyers don't buy on capability — they buy on risk reduction.</strong> The pitch isn't "AI that finds liens faster." It's "a system designed so that if something goes wrong, you can show exactly what happened and why." That's a different product conversation entirely.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <div class="cta-box">
+    <h3>This is how I build.</h3>
+    <p>Domain-first. Risk-aware. Designed for the human who signs off — not just the algorithm that generates the output.</p>
+    <div class="cta-links">
+      <a href="/" class="cta-btn primary">VIEW ALL PROJECTS</a>
+      <a href="/usps-ml/" class="cta-btn secondary">USPS ML FRAMEWORK →</a>
+      <a href="/about/" class="cta-btn secondary">ABOUT JAMES →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 James Lee · CaseZero</span>
+  <a href="/" class="footer-link">← Home</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
