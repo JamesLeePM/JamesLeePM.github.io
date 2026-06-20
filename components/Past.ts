@@ -168,6 +168,28 @@ const pastProjects: Project[] = [
     learnMoreLink: "https://apkpure.com/usps-health-connect-phr/com.usps.health",
     private: true,
   },
+  {
+    id: "6",
+    name: "USPS ML Governance Framework",
+    role: "AI Governance Lead",
+    timeline: "2024",
+    technologies: ["Machine Learning", "AI Governance", "Risk Management", "Federal Policy", "MLOps"],
+    metrics: {
+      scope: "Enterprise-wide",
+      focus: "Responsible AI",
+    },
+    image: "/images/projects/analytics.png",
+    description:
+      "Designed an end-to-end ML governance framework for USPS operations, covering model risk tiers, bias mitigation, explainability standards, and federal compliance requirements for responsible AI deployment at scale.",
+    achievements: [
+      "Defined risk-tiered model classification system",
+      "Established bias detection and mitigation protocols",
+      "Mapped framework to federal AI policy requirements",
+    ],
+    highlight: "Enterprise ML governance for one of the largest federal employers",
+    learnMoreLink: "/usps-ml/",
+    private: true,
+  },
 ];
 
 export default pastProjects;
