@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctr — AI Health Intelligence, Built for Privacy</title>
+<meta name="description" content="How James Lee designed a PHI-safe AI health platform — domain-first thinking in one of the most regulated consumer industries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--bg2:#0d0d0d;--bg3:rgba(255,255,255,0.03);--bg4:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);--text:#edeae2;--muted:#9d9890;--dim:rgba(237,234,226,0.35);--gold:#c9a84c;--teal:#2dd4bf;--red:#f87171;--green:#4ade80;--amber:#fbbf24;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 3rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:14px}.nav-logo{font-family:var(--mono);font-size:0.75rem;font-weight:500;color:var(--gold);letter-spacing:0.08em}.nav-div{width:1px;height:16px;background:var(--border2)}.nav-title{font-size:0.78rem;color:var(--muted)}.nav-right{display:flex;gap:1.5rem}.nav-right a{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;transition:color .2s}.nav-right a:hover{color:var(--text)}
+.hero{padding:120px 3rem 80px;max-width:860px;margin:0 auto}.hero-tag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--teal);text-transform:uppercase;margin-bottom:1.25rem}.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.5rem}.hero h1 em{font-style:normal;color:var(--teal)}.hero-sub{font-size:1.05rem;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:3rem}.hero-meta{display:flex;gap:2rem;flex-wrap:wrap}.meta-item{display:flex;flex-direction:column;gap:0.2rem}.meta-val{font-family:var(--mono);font-size:0.85rem;color:var(--text)}.meta-label{font-size:0.72rem;color:var(--dim)}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+.section{max-width:860px;margin:0 auto;padding:5rem 3rem}.section-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}.section h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;margin-bottom:1.5rem;line-height:1.2}.section p{color:var(--muted);line-height:1.8;margin-bottom:1.25rem;font-size:0.95rem}.section p strong{color:var(--text);font-weight:600}
+.callout{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--teal);border-radius:6px;padding:1.5rem 1.75rem;margin:2rem 0}.callout p{margin:0;font-size:0.92rem;color:var(--muted);font-style:italic}.callout p strong{color:var(--teal);font-style:normal}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}.problem-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem}.problem-card .icon{font-size:1.4rem;margin-bottom:0.75rem}.problem-card h4{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}.problem-card p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0}.principle{background:var(--bg2);padding:1.75rem}.principle-num{font-family:var(--mono);font-size:0.7rem;color:var(--teal);margin-bottom:0.75rem}.principle h4{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}.principle p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+.layers{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0}.layer{background:var(--bg2);padding:1.25rem 1.5rem;display:flex;gap:1.5rem;align-items:flex-start}.layer-tag{font-family:var(--mono);font-size:0.68rem;color:var(--teal);white-space:nowrap;min-width:90px;padding-top:0.1rem}.layer-content h4{font-size:0.88rem;font-weight:600;color:var(--text);margin-bottom:0.3rem}.layer-content p{font-size:0.82rem;color:var(--muted);line-height:1.5;margin:0}
+.learnings{display:flex;flex-direction:column;gap:1.25rem;margin:2rem 0}.learning{display:flex;gap:1rem;align-items:flex-start}.learning-arrow{color:var(--teal);flex-shrink:0;font-family:var(--mono);font-size:0.9rem;margin-top:0.1rem}.learning-text{font-size:0.9rem;color:var(--muted);line-height:1.65}.learning-text strong{color:var(--text)}
+.cta-section{max-width:860px;margin:0 auto;padding:4rem 3rem 6rem}.cta-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:3rem;text-align:center}.cta-box h3{font-family:var(--serif);font-size:1.8rem;margin-bottom:0.75rem}.cta-box p{color:var(--muted);margin-bottom:2rem;font-size:0.95rem}.cta-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.cta-btn{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:5px;transition:all .2s}.cta-btn.primary{background:var(--teal);color:#080808;font-weight:500}.cta-btn.primary:hover{opacity:0.88}.cta-btn.secondary{border:1px solid var(--border2);color:var(--muted)}.cta-btn.secondary:hover{border-color:var(--teal);color:var(--teal)}
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:0.78rem;color:var(--dim);font-family:var(--mono)}.footer-link{font-size:0.78rem;color:var(--muted);transition:color .2s}.footer-link:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}
+@media(max-width:680px){nav{padding:0 1.5rem}.hero,.section,.cta-section{padding-left:1.5rem;padding-right:1.5rem}.hero{padding-top:90px}footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">← JAMES LEE</a>
+    <div class="nav-div"></div>
+    <span class="nav-title">Sanctr</span>
+  </div>
+  <div class="nav-right">
+    <a href="/portfolio/">Portfolio</a>
+    <a href="/casezero/">CaseZero</a>
+    <a href="/about/">About</a>
+  </div>
+</nav>
+
+<div class="hero reveal">
+  <div class="hero-tag">Case Study · Health AI · Privacy Architecture</div>
+  <h1>Health Intelligence<br>That <em>Earns</em> Your Trust</h1>
+  <p class="hero-sub">Healthcare data is the most personal data a person can share. Most health apps treat privacy as a compliance checkbox. Sanctr was designed with privacy as the product — because trust is the only thing that makes health AI work.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-val">Health Tech</span><span class="meta-label">Industry</span></div>
+    <div class="meta-item"><span class="meta-val">Individuals</span><span class="meta-label">Primary User</span></div>
+    <div class="meta-item"><span class="meta-val">PHI / HIPAA Adjacent</span><span class="meta-label">Risk Profile</span></div>
+    <div class="meta-item"><span class="meta-val">Zero PHI in Logs</span><span class="meta-label">Data Principle</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">01 — The Problem</div>
+  <h2>Why Most Health Apps Fail People</h2>
+  <p>People don't lack health data. They lack <strong>health understanding</strong>. Lab results come back as numbers without context. Symptoms get Googled into spirals. Wearable data sits uninterpreted. Doctors have 12 minutes per visit.</p>
+  <p>The gap isn't information — it's the trusted, intelligent layer between raw health data and actionable understanding. And it has to be built in a way where users never have to wonder: <strong>what are you doing with my data?</strong></p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">🔬</div>
+      <h4>Data Without Context</h4>
+      <p>Lab values, vitals, and wearable metrics mean nothing without interpretation. Most people don't know if their A1C trend is alarming or normal.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔒</div>
+      <h4>Trust Deficit</h4>
+      <p>Health apps have a track record of selling or mishandling personal data. Users know it. Adoption dies on arrival when trust isn't established from day one.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⏳</div>
+      <h4>The 12-Minute Visit</h4>
+      <p>Primary care is rationed. The intelligent layer that helps a person understand their health between visits doesn't exist — or is buried inside a walled garden.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🧩</div>
+      <h4>Fragmented Data</h4>
+      <p>Health data lives in five apps, two hospital portals, a wearable, and a paper folder. Nobody — including the patient — has the full picture.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The core insight:</strong> people will share their most sensitive data with an AI — but only if the product makes it undeniably clear that the data is working for them, not being harvested from them. Privacy isn't a feature. It's the business model.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">02 — Design Principles</div>
+  <h2>Built Around the Person, Not the Data</h2>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <h4>No PHI in Logs — Ever</h4>
+      <p>Protected health information never appears in application logs, error traces, or telemetry. This isn't a policy — it's enforced at the architecture level. You can't accidentally log what the system never receives in plaintext.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <h4>AI as Interpreter, Not Diagnostician</h4>
+      <p>Sanctr explains what health data means and surfaces patterns — it never diagnoses, prescribes, or replaces clinical judgment. The boundary is precise and non-negotiable. Users are always directed toward their provider for clinical decisions.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <h4>Transparency by Default</h4>
+      <p>Every insight includes its source and confidence level. Users can always see what data an observation is based on. There are no black-box health scores — only explainable observations with clear sourcing.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">03 — Privacy Architecture</div>
+  <h2>How We Designed for Trust</h2>
+  <p>Trust in a health product isn't built through a privacy policy — it's built through architecture decisions users can feel. Every layer of Sanctr is designed so that even if something goes wrong, the damage is bounded.</p>
+
+  <div class="layers">
+    <div class="layer">
+      <div class="layer-tag">DATA INGESTION</div>
+      <div class="layer-content">
+        <h4>Minimum Necessary Collection</h4>
+        <p>We collect only what's needed to generate the insight the user asked for. No passive harvesting, no ambient data collection, no profile building for advertising.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-tag">PROCESSING</div>
+      <div class="layer-content">
+        <h4>Ephemeral Context Windows</h4>
+        <p>Health data passed to AI models is scoped to the user's session context. It is not stored in model memory, not used for training, and not retained after the response is generated.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-tag">LOGGING</div>
+      <div class="layer-content">
+        <h4>Structural PHI Exclusion</h4>
+        <p>Log pipelines are architected to structurally exclude health data fields. The exclusion is at the schema level — not a filter applied after the fact.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-tag">OUTPUT</div>
+      <div class="layer-content">
+        <h4>Explainable, Source-Cited Insights</h4>
+        <p>Every AI-generated insight includes what data it came from and what it is and isn't claiming. Users are never presented with a conclusion without a traceable basis.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-tag">USER CONTROL</div>
+      <div class="layer-content">
+        <h4>Full Deletion, Real Deletion</h4>
+        <p>When a user deletes their data, it's gone — from the database, from backups on a defined schedule, from everywhere the product touches. Not archived. Deleted.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">04 — What I Learned</div>
+  <h2>The Decisions That Shaped the Product</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Nine years inside USPS Health Connect changed how I think about health products.</strong> I watched what happened when a healthcare product earned genuine trust at scale — White House recognition, 100% adoption, Surgeon General acknowledgment. Trust at scale requires architecture, not aspiration.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>The AI-clinician boundary is the most important product decision in health tech.</strong> Crossing it even slightly — a recommendation that sounds clinical, a score that implies diagnosis — destroys trust and creates liability simultaneously. Precision matters more than capability.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Privacy as architecture beats privacy as policy.</strong> A privacy policy is a promise. A structural exclusion at the log schema level is a guarantee. Users who understand the difference trust the product. The ones who don't still benefit from the architecture.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Health users don't want to be managed — they want to be understood.</strong> The tone, the framing, and the output format matter as much as the accuracy. An insight delivered with clinical coldness gets ignored. The same insight framed for a real person gets acted on.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="cta-section reveal">
+  <div class="cta-box">
+    <h3>This is how I build.</h3>
+    <p>Privacy by architecture. Intelligence with a boundary. Trust as the product, not the pitch.</p>
+    <div class="cta-links">
+      <a href="/" class="cta-btn primary">VIEW ALL PROJECTS</a>
+      <a href="/casezero/" class="cta-btn secondary">CASEZERO →</a>
+      <a href="/logixvast/" class="cta-btn secondary">LOGIXVAST →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 James Lee · Sanctr</span>
+  <a href="/" class="footer-link">← Home</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

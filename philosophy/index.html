@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domain-First — James Lee's Product Philosophy</title>
+<meta name="description" content="James Lee's product philosophy: go inside industries, find the real problem, then build the fix. A framework for building AI products that actually work in regulated, high-stakes domains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--bg2:#0d0d0d;--bg3:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);--text:#edeae2;--muted:#9d9890;--dim:rgba(237,234,226,0.35);--gold:#c9a84c;--purple:#c084fc;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 3rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:14px}.nav-logo{font-family:var(--mono);font-size:0.75rem;font-weight:500;color:var(--gold);letter-spacing:0.08em}.nav-div{width:1px;height:16px;background:var(--border2)}.nav-title{font-size:0.78rem;color:var(--muted)}.nav-right{display:flex;gap:1.5rem}.nav-right a{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;transition:color .2s}.nav-right a:hover{color:var(--text)}
+.hero{padding:120px 3rem 80px;max-width:800px;margin:0 auto}.hero-tag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--purple);text-transform:uppercase;margin-bottom:1.25rem}.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,6vw,4.2rem);font-weight:600;line-height:1.08;margin-bottom:1.5rem}.hero h1 em{font-style:normal;color:var(--purple)}.hero-sub{font-size:1.1rem;color:var(--muted);max-width:580px;line-height:1.8}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+.section{max-width:800px;margin:0 auto;padding:5rem 3rem}.section-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}.section h2{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:600;margin-bottom:1.5rem;line-height:1.15}.section p{color:var(--muted);line-height:1.85;margin-bottom:1.4rem;font-size:0.97rem}.section p strong{color:var(--text);font-weight:600}
+.pullquote{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);color:var(--text);line-height:1.4;padding:2.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:2.5rem 0}
+.three-acts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2.5rem 0}
+.act{background:var(--bg2);padding:2rem 1.75rem}.act-num{font-family:var(--mono);font-size:0.68rem;color:var(--purple);letter-spacing:0.1em;margin-bottom:0.75rem}.act h3{font-family:var(--serif);font-size:1.4rem;font-weight:600;margin-bottom:0.75rem;line-height:1.2}.act p{font-size:0.82rem;color:var(--muted);line-height:1.6;margin:0}
+.wrong-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0}
+.wr-col{background:var(--bg2);padding:1.75rem}.wr-header{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}.wr-header.wrong{color:var(--red,#f87171)}.wr-header.right{color:var(--green,#4ade80)}.wr-items{display:flex;flex-direction:column;gap:0.75rem}.wr-item{font-size:0.85rem;color:var(--muted);line-height:1.5;padding-left:1rem;position:relative}.wr-item::before{content:'';position:absolute;left:0;top:0.55rem;width:5px;height:5px;border-radius:50%}.wr-col:first-child .wr-item::before{background:#f87171}.wr-col:last-child .wr-item::before{background:#4ade80}
+.evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}.evidence-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem}.evidence-card .product{font-family:var(--mono);font-size:0.7rem;color:var(--purple);margin-bottom:0.5rem}.evidence-card h4{font-size:0.92rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}.evidence-card p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}.evidence-card a{display:block;margin-top:0.75rem;font-family:var(--mono);font-size:0.7rem;color:var(--gold)}
+.cta-section{max-width:800px;margin:0 auto;padding:4rem 3rem 6rem}.cta-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:3rem;text-align:center}.cta-box h3{font-family:var(--serif);font-size:1.8rem;margin-bottom:0.75rem}.cta-box p{color:var(--muted);margin-bottom:2rem;font-size:0.95rem}.cta-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.cta-btn{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:5px;transition:all .2s}.cta-btn.primary{background:var(--purple);color:#080808;font-weight:500}.cta-btn.primary:hover{opacity:0.88}.cta-btn.secondary{border:1px solid var(--border2);color:var(--muted)}.cta-btn.secondary:hover{border-color:var(--purple);color:var(--purple)}
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:0.78rem;color:var(--dim);font-family:var(--mono)}.footer-link{font-size:0.78rem;color:var(--muted);transition:color .2s}.footer-link:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}
+@media(max-width:680px){nav{padding:0 1.5rem}.hero,.section,.cta-section{padding-left:1.5rem;padding-right:1.5rem}.hero{padding-top:90px}.three-acts{grid-template-columns:1fr}.wrong-right{grid-template-columns:1fr}footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">← JAMES LEE</a>
+    <div class="nav-div"></div>
+    <span class="nav-title">Product Philosophy</span>
+  </div>
+  <div class="nav-right">
+    <a href="/portfolio/">Portfolio</a>
+    <a href="/casezero/">CaseZero</a>
+    <a href="/about/">About</a>
+  </div>
+</nav>
+
+<div class="hero reveal">
+  <div class="hero-tag">Product Philosophy · Domain-First</div>
+  <h1>I go inside<br>industries.<br>Then I build<br>the <em>fix.</em></h1>
+  <p class="hero-sub">Most AI products are built by technologists who looked at an industry from the outside and decided they understood it. I've spent my career doing the opposite — going inside first, earning fluency, then building from that position.</p>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">The Core Belief</div>
+  <h2>Technology Is Easy. Domain Is Hard.</h2>
+  <p>The tools to build AI products have never been more accessible. A capable engineer can assemble a working prototype in a weekend. This is not the hard part.</p>
+  <p>The hard part is knowing <strong>which problem is actually worth solving</strong>, understanding the workflow deeply enough to know where automation breaks down, and earning the trust of the domain expert who will decide whether your product lives or dies.</p>
+  <p>Most products fail not because the technology didn't work — but because the product was built for a version of the problem the builder imagined, not the problem the practitioner actually lives with every day.</p>
+
+  <div class="pullquote">"The best product decisions I've made came from time spent inside the workflow — not from reading industry reports or user surveys."</div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">The Framework</div>
+  <h2>Three Acts. Every Time.</h2>
+  <p>Domain-first isn't a mindset — it's a repeatable process. The same three acts appear in every product I've built, whether at USPS or in my own companies.</p>
+
+  <div class="three-acts">
+    <div class="act">
+      <div class="act-num">ACT ONE</div>
+      <h3>Go Inside</h3>
+      <p>Before a spec, before a mockup, before a line of code — spend real time inside the domain. Shadow the practitioner. Do the work manually. Understand what they're afraid of, what they've tried before, and why it failed.</p>
+    </div>
+    <div class="act">
+      <div class="act-num">ACT TWO</div>
+      <h3>Find the Real Problem</h3>
+      <p>The stated problem is rarely the real problem. The real problem is usually one or two layers deeper — the constraint that makes the stated problem hard to solve, or the fear that makes the obvious solution unacceptable.</p>
+    </div>
+    <div class="act">
+      <div class="act-num">ACT THREE</div>
+      <h3>Build the Fix</h3>
+      <p>Now build — but build toward the real problem, not the surface one. This changes everything: what you build, how it's designed, how it's presented, and how you talk about it to the person who has to trust it with their work.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">What This Looks Like in Practice</div>
+  <h2>Domain-First vs. Tech-First</h2>
+  <p>The difference between these two approaches shows up most clearly in regulated, high-stakes domains — where a wrong answer has real consequences and where the buyer is also the person whose career is on the line if it goes wrong.</p>
+
+  <div class="wrong-right">
+    <div class="wr-col">
+      <div class="wr-header wrong">TECH-FIRST APPROACH</div>
+      <div class="wr-items">
+        <div class="wr-item">Builds what's technically impressive, then looks for a user</div>
+        <div class="wr-item">Designs for the demo, not for the daily workflow</div>
+        <div class="wr-item">Treats domain expertise as a sales problem to overcome</div>
+        <div class="wr-item">Ships confidence — surfaces uncertainty as a bug</div>
+        <div class="wr-item">Measures success by features shipped</div>
+        <div class="wr-item">Learns about liability from a lawyer after the fact</div>
+      </div>
+    </div>
+    <div class="wr-col">
+      <div class="wr-header right">DOMAIN-FIRST APPROACH</div>
+      <div class="wr-items">
+        <div class="wr-item">Starts with the practitioner's problem, then chooses the tool</div>
+        <div class="wr-item">Designs for the moment of highest stress in the workflow</div>
+        <div class="wr-item">Treats domain expertise as the product's most important input</div>
+        <div class="wr-item">Surfaces uncertainty explicitly — it's the trust mechanism</div>
+        <div class="wr-item">Measures success by decisions improved</div>
+        <div class="wr-item">Designs liability out of the system before writing the first spec</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">Evidence</div>
+  <h2>Where This Has Played Out</h2>
+  <p>This framework isn't theoretical. Every product below was built with domain fluency earned the hard way — from the inside.</p>
+
+  <div class="evidence">
+    <div class="evidence-card">
+      <div class="product">USPS · 2013–2019</div>
+      <h4>9 Years Inside Federal Operations</h4>
+      <p>Led $100M+ systems, a 400-person health platform recognized by the White House, and an analytics platform that cut revenue losses by 60% — all built after going deep inside the operational workflows, not around them.</p>
+      <a href="/usps-ml/">See ML Governance Framework →</a>
+    </div>
+    <div class="evidence-card">
+      <div class="product">CASEZERO · 2024–</div>
+      <h4>Legal Workflow Before Legal Tech</h4>
+      <p>Spent weeks inside a PI law firm's lien research workflow before writing a spec. The attorney approval gate — the product's core differentiator — came directly from understanding what attorneys are actually afraid of, not from legal tech market research.</p>
+      <a href="/casezero/">See Architecture →</a>
+    </div>
+    <div class="evidence-card">
+      <div class="product">SANCTR · 2024–</div>
+      <h4>Health Trust Before Health AI</h4>
+      <p>Built Sanctr's privacy architecture around what USPS Health Connect taught me about health data trust at scale — that structural guarantees outperform policy promises, and that users feel the difference even when they can't articulate why.</p>
+      <a href="/sanctr/">See Case Study →</a>
+    </div>
+    <div class="evidence-card">
+      <div class="product">LOGIXVAST · 2024–</div>
+      <h4>Operator Intelligence, Not Analyst Intelligence</h4>
+      <p>Designed LogixVast around the dispatcher — not the supply chain analyst. Real-time architecture because a routing decision made on 4-hour-old data is a bad routing decision, regardless of how beautiful the dashboard is.</p>
+      <a href="/logixvast/">See Case Study →</a>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">Why It Matters Now</div>
+  <h2>AI Makes Domain Fluency More Important, Not Less</h2>
+  <p>A common misconception: AI lowers the barrier to building in complex domains, so domain expertise matters less. The opposite is true.</p>
+  <p>AI makes it faster and cheaper to build a product that <em>looks</em> like it solves a domain problem. <strong>But it doesn't make it easier to know which problem to solve, or to earn the trust of the domain expert who will decide whether to use it.</strong></p>
+  <p>In regulated industries — legal, health, logistics, finance, government — the decision to adopt an AI product is made by someone whose career, license, or liability is on the line. They're not evaluating your technology. They're evaluating whether you understand what you're asking them to trust.</p>
+  <p>Domain-first is how you answer that question before they ask it.</p>
+</div>
+
+<hr class="div">
+
+<div class="cta-section reveal">
+  <div class="cta-box">
+    <h3>This is the lens.</h3>
+    <p>Every product I've built starts the same way — from the inside out. If you're building in a regulated domain and want a leader who's been inside it, let's talk.</p>
+    <div class="cta-links">
+      <a href="/" class="cta-btn primary">SEE ALL PROJECTS</a>
+      <a href="/casezero/" class="cta-btn secondary">CASEZERO →</a>
+      <a href="/about/" class="cta-btn secondary">ABOUT JAMES →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 James Lee</span>
+  <a href="/" class="footer-link">← Home</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

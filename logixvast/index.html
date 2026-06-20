@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogixVast — Intelligence for the Supply Chain</title>
+<meta name="description" content="How James Lee designed a logistics intelligence platform — domain-first product thinking in freight, operations, and real-time supply chain visibility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--bg2:#0d0d0d;--bg3:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);--text:#edeae2;--muted:#9d9890;--dim:rgba(237,234,226,0.35);--gold:#c9a84c;--orange:#fb923c;--red:#f87171;--green:#4ade80;--amber:#fbbf24;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 3rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:14px}.nav-logo{font-family:var(--mono);font-size:0.75rem;font-weight:500;color:var(--gold);letter-spacing:0.08em}.nav-div{width:1px;height:16px;background:var(--border2)}.nav-title{font-size:0.78rem;color:var(--muted)}.nav-right{display:flex;gap:1.5rem}.nav-right a{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em;transition:color .2s}.nav-right a:hover{color:var(--text)}
+.hero{padding:120px 3rem 80px;max-width:860px;margin:0 auto}.hero-tag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--orange);text-transform:uppercase;margin-bottom:1.25rem}.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.5rem}.hero h1 em{font-style:normal;color:var(--orange)}.hero-sub{font-size:1.05rem;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:3rem}.hero-meta{display:flex;gap:2rem;flex-wrap:wrap}.meta-item{display:flex;flex-direction:column;gap:0.2rem}.meta-val{font-family:var(--mono);font-size:0.85rem;color:var(--text)}.meta-label{font-size:0.72rem;color:var(--dim)}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+.section{max-width:860px;margin:0 auto;padding:5rem 3rem}.section-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}.section h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;margin-bottom:1.5rem;line-height:1.2}.section p{color:var(--muted);line-height:1.8;margin-bottom:1.25rem;font-size:0.95rem}.section p strong{color:var(--text);font-weight:600}
+.callout{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--orange);border-radius:6px;padding:1.5rem 1.75rem;margin:2rem 0}.callout p{margin:0;font-size:0.92rem;color:var(--muted);font-style:italic}.callout p strong{color:var(--orange);font-style:normal}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}.problem-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem}.problem-card .icon{font-size:1.4rem;margin-bottom:0.75rem}.problem-card h4{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}.problem-card p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0}.principle{background:var(--bg2);padding:1.75rem}.principle-num{font-family:var(--mono);font-size:0.7rem;color:var(--orange);margin-bottom:0.75rem}.principle h4{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem}.principle p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}
+.intel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:2rem 0}.intel-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color .2s}.intel-card:hover{border-color:var(--border2)}.intel-card h4{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}.intel-card p{font-size:0.82rem;color:var(--muted);line-height:1.55;margin:0}.intel-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.learnings{display:flex;flex-direction:column;gap:1.25rem;margin:2rem 0}.learning{display:flex;gap:1rem;align-items:flex-start}.learning-arrow{color:var(--orange);flex-shrink:0;font-family:var(--mono);font-size:0.9rem;margin-top:0.1rem}.learning-text{font-size:0.9rem;color:var(--muted);line-height:1.65}.learning-text strong{color:var(--text)}
+.cta-section{max-width:860px;margin:0 auto;padding:4rem 3rem 6rem}.cta-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:3rem;text-align:center}.cta-box h3{font-family:var(--serif);font-size:1.8rem;margin-bottom:0.75rem}.cta-box p{color:var(--muted);margin-bottom:2rem;font-size:0.95rem}.cta-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.cta-btn{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:5px;transition:all .2s}.cta-btn.primary{background:var(--orange);color:#080808;font-weight:500}.cta-btn.primary:hover{opacity:0.88}.cta-btn.secondary{border:1px solid var(--border2);color:var(--muted)}.cta-btn.secondary:hover{border-color:var(--orange);color:var(--orange)}
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:0.78rem;color:var(--dim);font-family:var(--mono)}.footer-link{font-size:0.78rem;color:var(--muted);transition:color .2s}.footer-link:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}
+@media(max-width:680px){nav{padding:0 1.5rem}.hero,.section,.cta-section{padding-left:1.5rem;padding-right:1.5rem}.hero{padding-top:90px}footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">← JAMES LEE</a>
+    <div class="nav-div"></div>
+    <span class="nav-title">LogixVast</span>
+  </div>
+  <div class="nav-right">
+    <a href="/portfolio/">Portfolio</a>
+    <a href="/casezero/">CaseZero</a>
+    <a href="/about/">About</a>
+  </div>
+</nav>
+
+<div class="hero reveal">
+  <div class="hero-tag">Case Study · Logistics AI · Operations Intelligence</div>
+  <h1>The Supply Chain<br>Deserves <em>Better Intelligence</em></h1>
+  <p class="hero-sub">Logistics operators make hundreds of decisions a day — routing, capacity, timing, carrier selection — mostly on gut and spreadsheets. LogixVast is built on the belief that real-time intelligence should be as available to a regional freight operator as it is to a Fortune 500 shipper.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-val">Logistics / Freight</span><span class="meta-label">Industry</span></div>
+    <div class="meta-item"><span class="meta-val">Operators & Dispatchers</span><span class="meta-label">Primary User</span></div>
+    <div class="meta-item"><span class="meta-val">Real-Time</span><span class="meta-label">Data Model</span></div>
+    <div class="meta-item"><span class="meta-val">Decision Support</span><span class="meta-label">AI Role</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">01 — The Problem</div>
+  <h2>Logistics Runs on Instinct. It Shouldn't Have To.</h2>
+  <p>The freight and logistics industry moves $900B+ annually in the US alone — and most operators are still making critical decisions with delayed data, disconnected systems, and experience-based intuition.</p>
+  <p>Large enterprises have supply chain visibility platforms. Everyone else has a TMS from 2009, a spreadsheet, and a dispatcher who's been there 20 years. <strong>The intelligence gap between big and small in logistics is enormous — and it's where margin disappears.</strong></p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">📊</div>
+      <h4>Delayed Visibility</h4>
+      <p>Shipment status, carrier performance, and cost data arrive hours or days after the decisions that needed them. Operators are always flying blind on yesterday's information.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔗</div>
+      <h4>Disconnected Systems</h4>
+      <p>TMS, ERP, carrier portals, and tracking systems don't talk to each other. The full picture of an operation exists only in someone's head — and leaves when they do.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">💸</div>
+      <h4>Hidden Cost Leakage</h4>
+      <p>Accessorial charges, detention fees, and fuel surcharges accrue invisibly until the invoice arrives. By then it's too late to dispute or route around them.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🧠</div>
+      <h4>Institutional Knowledge Risk</h4>
+      <p>The best decisions live in experienced dispatchers' heads. When they leave, the intelligence leaves with them. There's no system capturing the patterns that make operations efficient.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The core insight:</strong> logistics operators don't need another dashboard — they need a system that surfaces the right signal at the moment a decision is being made. Intelligence at the point of action, not intelligence in a report viewed after the fact.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">02 — Design Principles</div>
+  <h2>Built for the Operator, Not the Analyst</h2>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <h4>Decision Support, Not Decision Replacement</h4>
+      <p>Experienced logistics operators have hard-won instincts. The system augments those instincts with real-time data — it doesn't override them. Every AI recommendation surfaces its reasoning so the operator can agree, override, or learn from it.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <h4>Real-Time or Useless</h4>
+      <p>In freight, a routing decision made on 4-hour-old data is a bad decision. The data model is built around real-time ingestion and event-driven updates — not batch reporting cycles that arrive after the truck has already departed.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <h4>Institutional Knowledge Capture</h4>
+      <p>Every decision made in the platform — and its outcome — builds a layer of operational intelligence. Over time, the system learns the patterns that make a specific operation efficient, creating a knowledge asset that outlasts any individual employee.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">03 — Intelligence Layers</div>
+  <h2>What the Platform Sees</h2>
+  <p>LogixVast is designed around four intelligence layers that compound on each other. Each layer is useful in isolation; together they create a picture of an operation that no single system or person could maintain manually.</p>
+
+  <div class="intel-grid">
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Shipment Visibility</h4>
+      <p>Real-time location, status, and ETA across carriers and modes. Exceptions surfaced before they become problems — not after the delivery window has closed.</p>
+    </div>
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Carrier Performance</h4>
+      <p>On-time rates, damage frequency, and cost consistency tracked per carrier, lane, and time period. Selection intelligence that improves with every shipment.</p>
+    </div>
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Cost Intelligence</h4>
+      <p>Accessorial charges, detention patterns, and fuel surcharge trends surfaced in real time. Dispute triggers flagged automatically before invoices are approved.</p>
+    </div>
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Route Optimization</h4>
+      <p>AI-assisted routing that accounts for carrier capacity, historical lane performance, and current freight market conditions — not just distance and price.</p>
+    </div>
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Demand Forecasting</h4>
+      <p>Pattern recognition across order history, seasonality, and external signals to help operators anticipate capacity needs before the surge hits.</p>
+    </div>
+    <div class="intel-card">
+      <h4><span class="intel-dot"></span>Operations Memory</h4>
+      <p>Every decision and outcome archived as institutional knowledge. New dispatchers start with the accumulated intelligence of everyone who came before them.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="section reveal">
+  <div class="section-label">04 — What I Learned</div>
+  <h2>The Decisions That Shaped the Product</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Logistics operators are skeptical of technology for good reason.</strong> They've been sold platforms that required 6-month implementations and a dedicated IT team. The product had to be deployable fast and produce visible value within the first week — or it would be shelved like every other system before it.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>The dispatcher is the product's most important user — and the hardest to win.</strong> Experienced dispatchers have seen companies try to automate their job. The pitch isn't "AI will do what you do." It's "AI will handle the noise so you can focus on the decisions that actually require your judgment."</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>Real-time data architecture is a product decision, not just a technical one.</strong> Choosing event-driven over batch processing changed the entire user experience — from a reporting tool operators check at the end of the day, to an intelligence layer they keep open during operations. Same data. Completely different product.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-arrow">→</div>
+      <div class="learning-text"><strong>The margin story sells faster than the efficiency story.</strong> "Save 12% on freight costs" lands differently than "improve visibility." Logistics buyers think in margin. The product speaks their language — not the language of software demos.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="cta-section reveal">
+  <div class="cta-box">
+    <h3>This is how I build.</h3>
+    <p>Domain-first. Real-time by design. Intelligence that respects the expertise of the person using it.</p>
+    <div class="cta-links">
+      <a href="/" class="cta-btn primary">VIEW ALL PROJECTS</a>
+      <a href="/casezero/" class="cta-btn secondary">CASEZERO →</a>
+      <a href="/sanctr/" class="cta-btn secondary">SANCTR →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 James Lee · LogixVast</span>
+  <a href="/" class="footer-link">← Home</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
